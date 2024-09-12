@@ -288,3 +288,14 @@ class WorkCountries(db.Model, SerializerMixin):
 
     serialize_rules=("-profile",)
 
+
+#------------------------Set up email modles---------------------------
+class Emails(db.Model, SerializerMixin):
+    __tablename__ = "emails"
+
+    id=db.Column(db.Integer, primary_key=True)
+    recipient = db.Column(db.String, nullable=False)
+    sender = db.Column(db.String, nullable=False)
+    subject=db.Column(db.String, nullable=False)
+    message=db.Column(db.String, nullable=False)
+

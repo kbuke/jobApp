@@ -4,7 +4,11 @@ from flask_restful import Resource
 
 from config import app, db, api, os 
 
-from models import Profile, EmploymentHistory, KeyRoles, EmployeeCaseStudies, EmployerReference, CaseStudyRoles, Education, SocialMedia, CapstoneProjects, CapstoneProjectAchievments, CapstoneProjectContext, Charities, WorkCountries
+import smtplib 
+
+from email.mime.text import MIMEText
+
+from models import Profile, EmploymentHistory, KeyRoles, EmployeeCaseStudies, EmployerReference, CaseStudyRoles, Education, SocialMedia, CapstoneProjects, CapstoneProjectAchievments, CapstoneProjectContext, Charities, WorkCountries, Emails
 class Profiles(Resource):
     def get(self):
         profiles = [profile.to_dict(rules=(
@@ -172,6 +176,59 @@ class Countries(Resource):
         countries = [country.to_dict() for country in WorkCountries.query.all()]
         return countries, 200
 
+class Email(Resource):
+    def get(self):
+        emails = [email.to_dict() for email in Emails.query.all()]
+        return emails
+
+    def post(self):
+        json = request.get_json()
+
+        # Extract the email details from the request body
+        recipient = json.get("userEmail")          # Your email (where the message is sent)
+        sender = json.get("respondAddress")        # The sender's email (provided by the user)
+        subject = json.get("emailSubject")
+        message_body = json.get("emailMessage")
+
+        breakpoint()
+
+        try:
+            # Save email details to database
+            new_email = Emails(
+                recipient=recipient,
+                sender=sender,
+                subject=subject,
+                message=message_body
+            )
+            db.session.add(new_email)
+            db.session.commit()
+
+            # SMTP server configuration
+            smtp_server = "smtp.gmail.com"
+            smtp_port = 587
+            sender_email = "kabuke13@gmail.com"  
+            sender_password = "qnwx hges envp ivzq"  
+
+            # Construct the email message
+            msg = MIMEText(f"From: {sender}\n\nMessage:\n{message_body}")
+            msg["Subject"] = subject
+            msg["From"] = sender_email  # The sender (you)
+            msg["To"] = recipient        # The recipient (you)
+
+            # Send the email via Gmail SMTP
+            server = smtplib.SMTP(smtp_server, smtp_port)
+            server.starttls()  # Secure the connection
+            server.login(sender_email, sender_password)
+            server.sendmail(sender_email, recipient, msg.as_string())
+            server.quit()
+
+            return {"message": "Email sent successfully"}, 201
+
+        except smtplib.SMTPException as smtp_error:
+            return {"error": "Failed to send email: " + str(smtp_error)}, 500
+
+
+
 
 
 api.add_resource(Profiles, '/profiles')
@@ -203,5 +260,7 @@ api.add_resource(CapstoneProjectTypes, '/projecttypes')
 api.add_resource(Charity, '/charities')
 
 api.add_resource(Countries, '/countries')
+
+api.add_resource(Email, '/emails')
 if __name__ == "__main__":
     app.run(port=5555, debug=True)
