@@ -299,3 +299,15 @@ class Emails(db.Model, SerializerMixin):
     subject=db.Column(db.String, nullable=False)
     message=db.Column(db.String, nullable=False)
 
+#------------------------Set up card optiions------------------------
+class CardOptions(db.Model, SerializerMixin):
+    __tablename__ = "card_options"
+
+    id=db.Column(db.Integer, primary_key=True)
+    title=db.Column(db.String, nullable=False)
+    image=db.Column(db.String, nullable=False)
+
+
+
+
+

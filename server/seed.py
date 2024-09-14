@@ -1,4 +1,4 @@
-from models import Profile, EmploymentHistory, KeyRoles, EmployeeCaseStudies, EmployerReference, CaseStudyRoles, Education, SocialMedia, CapstoneProjects, CapstoneProjectAchievments, CapstoneProjectAchievments, CapstoneProjectContext, Charities, WorkCountries
+from models import Profile, EmploymentHistory, KeyRoles, EmployeeCaseStudies, EmployerReference, CaseStudyRoles, Education, SocialMedia, CapstoneProjects, CapstoneProjectAchievments, CapstoneProjectAchievments, CapstoneProjectContext, Charities, WorkCountries, CardOptions
 
 
 from app import app 
@@ -180,6 +180,49 @@ if __name__ == "__main__":
             user_id=1
         )
         db.session.add_all([eu])
+        db.session.commit()
+
+        print("Seeding Card Options")
+        work = CardOptions(
+            title="Work Experience",
+            image="https://www.marketing91.com/wp-content/uploads/2020/07/Work-Experience.jpg"
+        )
+
+        education = CardOptions(
+            title="Education",
+            image="https://www.regenesys.net/reginsights/wp-content/uploads/2019/11/systemic-evaluation.jpg"
+        )
+
+        projects = CardOptions(
+            title="Capstone Projects",
+            image="https://www.sydle.com/blog/assets/post/projects-and-processes-what-is-the-difference-614e00a1a9d8415db45a9230/project-and-process.jpg"
+        )
+
+        coding_languages = CardOptions(
+            title="Languages, Microframeworks & Libraries",
+            image="https://woz-u.com/wp-content/uploads/2022/06/Evolution-of-Coding-scaled.jpg"
+        )
+
+        references = CardOptions(
+            title="References",
+            image="https://images.wsj.net/im-328910/square"
+        )
+
+        charity = CardOptions(
+            title="Charity Work",
+            image="https://immigrationbarrister.co.uk/content/uploads/2021/01/AdobeStock_84445998-scaled-e1611654853393.jpeg"
+        )
+
+        hobbies = CardOptions(
+            title="Hobbies",
+            image="https://www.cvmaker.uk/static/43716d799aa73abfd36f848df81815f9/126f5/06_when-and-how-to-list-hobbies-and-interests_.png"
+        )
+
+        socials = CardOptions(
+            title="Social Media",
+            image="https://www.wscubetech.com/blog/wp-content/uploads/2024/04/social-media-1024x683.webp"
+        )
+        db.session.add_all([work, education, projects, coding_languages, references, charity, hobbies, socials])
         db.session.commit()
 
         print("Finished seeding")

@@ -8,7 +8,7 @@ import smtplib
 
 from email.mime.text import MIMEText
 
-from models import Profile, EmploymentHistory, KeyRoles, EmployeeCaseStudies, EmployerReference, CaseStudyRoles, Education, SocialMedia, CapstoneProjects, CapstoneProjectAchievments, CapstoneProjectContext, Charities, WorkCountries, Emails
+from models import Profile, EmploymentHistory, KeyRoles, EmployeeCaseStudies, EmployerReference, CaseStudyRoles, Education, SocialMedia, CapstoneProjects, CapstoneProjectAchievments, CapstoneProjectContext, Charities, WorkCountries, Emails, CardOptions
 class Profiles(Resource):
     def get(self):
         profiles = [profile.to_dict(rules=(
@@ -176,6 +176,11 @@ class Countries(Resource):
         countries = [country.to_dict() for country in WorkCountries.query.all()]
         return countries, 200
 
+class CardOption(Resource):
+    def get(self):
+        card_options = [card_option.to_dict() for card_option in CardOptions.query.all()]
+        return card_options, 200 
+
 class Email(Resource):
     def get(self):
         emails = [email.to_dict() for email in Emails.query.all()]
@@ -189,8 +194,6 @@ class Email(Resource):
         sender = json.get("respondAddress")        # The sender's email (provided by the user)
         subject = json.get("emailSubject")
         message_body = json.get("emailMessage")
-
-        breakpoint()
 
         try:
             # Save email details to database
@@ -260,6 +263,8 @@ api.add_resource(CapstoneProjectTypes, '/projecttypes')
 api.add_resource(Charity, '/charities')
 
 api.add_resource(Countries, '/countries')
+
+api.add_resource(CardOption, '/options')
 
 api.add_resource(Email, '/emails')
 if __name__ == "__main__":
