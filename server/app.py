@@ -96,6 +96,7 @@ class EmployerCaseStudyId(Resource):
                 "-employer.key_roles",
                 "-employer.case_studies",
                 "-employer.reference",
+                 "-case_study_role.caseStudy",
             )), 201)
         return {
             "error": "case study not found"

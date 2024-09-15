@@ -203,6 +203,8 @@ class Education(db.Model, SerializerMixin):
 
     capstone_project=db.relationship("CapstoneProjects", backref="education")
 
+    serialize_rules=("-capstone_project",)
+
 
 #-------------------------Set up social media model-------------------------
 class SocialMedia(db.Model, SerializerMixin):
