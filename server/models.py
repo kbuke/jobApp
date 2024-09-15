@@ -309,6 +309,19 @@ class CardOptions(db.Model, SerializerMixin):
     title=db.Column(db.String, nullable=False)
     image=db.Column(db.String, nullable=False)
 
+#------------------------Set up software languages------------------------
+class SoftwareLanguages(db.Model, SerializerMixin):
+    __tablename__ = "software_languages"
+
+    id=db.Column(db.Integer, primary_key=True)
+    language_type=db.Column(db.String, nullable=False)
+    name=db.Column(db.String, nullable=False)
+    logo=db.Column(db.String, nullable=False)
+
+    #Add validation rules
+    @validates(language_type)
+
+
 
 
 
