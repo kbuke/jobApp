@@ -226,6 +226,7 @@ class CapstoneProjects(db.Model, SerializerMixin):
     name=db.Column(db.String, nullable=False)
     logo=db.Column(db.String, nullable=True)
     git_hub_link=db.Column(db.String, nullable=True)
+    description=db.Column(db.String, nullable=False, server_default="")
 
     employer_id = db.Column(db.Integer, db.ForeignKey("employmentHistory.id"), nullable=True)
     education_id = db.Column(db.Integer, db.ForeignKey("education.id"), nullable=True)
@@ -320,6 +321,11 @@ class SoftwareLanguages(db.Model, SerializerMixin):
 
     #Add validation rules
     @validates(language_type)
+    def validate_language_type(self, key, value):
+        allowed_types = ["Language", "Library", "Microframework"]
+        if value not in allowed_types:
+            raise ValueError(f"Inavlid language type: {value}. Must be either a language, library, or microframework")
+        return value
 
 
 

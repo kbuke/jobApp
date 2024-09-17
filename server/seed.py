@@ -1,4 +1,4 @@
-from models import Profile, EmploymentHistory, KeyRoles, EmployeeCaseStudies, EmployerReference, CaseStudyRoles, Education, SocialMedia, CapstoneProjects, CapstoneProjectAchievments, CapstoneProjectAchievments, CapstoneProjectContext, Charities, WorkCountries, CardOptions
+from models import Profile, EmploymentHistory, KeyRoles, EmployeeCaseStudies, EmployerReference, CaseStudyRoles, Education, SocialMedia, CapstoneProjects, CapstoneProjectAchievments, CapstoneProjectAchievments, CapstoneProjectContext, Charities, WorkCountries, CardOptions, SoftwareLanguages
 
 
 from app import app 
@@ -134,7 +134,8 @@ if __name__ == "__main__":
         nihonGo = CapstoneProjects(
             name="Nihon-Go",
             git_hub_link="https://github.com/kbuke/nihongo",
-            education_id=1
+            education_id=1,
+            description="I created a social-media/travel application centered around Japanese travel."
         )
         db.session.add_all([nihonGo])
         db.session.commit()
@@ -223,6 +224,45 @@ if __name__ == "__main__":
             image="https://www.wscubetech.com/blog/wp-content/uploads/2024/04/social-media-1024x683.webp"
         )
         db.session.add_all([work, education, projects, coding_languages, references, charity, hobbies, socials])
+        db.session.commit()
+
+        print("Seeding Languages")
+        javascript = SoftwareLanguages(
+            language_type="Language",
+            name="JavaScript",
+            logo="https://upload.wikimedia.org/wikipedia/commons/6/6a/JavaScript-logo.png"
+        )
+
+        css = SoftwareLanguages(
+            language_type="Language",
+            name="CSS",
+            logo="https://img-resize-cdn.joshmartin.ch/2550x0%2C23a14590c8ce7904d387b2aefcdf22500d0b68259a03a15a3cb23a0081316909/https://joshmartin.ch/app/uploads/2017/10/css3.svg"
+        )
+
+        python = SoftwareLanguages(
+            language_type="Language",
+            name="Python",
+            logo="https://i0.wp.com/junilearning.com/wp-content/uploads/2020/06/python-programming-language.webp?fit=1920%2C1920&ssl=1"
+        )
+
+        react = SoftwareLanguages(
+            language_type="Library",
+            name="React.js",
+            logo="https://media.licdn.com/dms/image/C4E12AQEBVCR2SpRr9g/article-cover_image-shrink_720_1280/0/1625909824541?e=2147483647&v=beta&t=Y_zSoI8cPUR3wQvPyYK15PLWpQJJ0si6OvsuXFnIC18"
+        )
+
+        sql = SoftwareLanguages(
+            language_type="Language",
+            name="SQL",
+            logo="https://media.licdn.com/dms/image/D4D12AQFjcz9MrPsWDQ/article-cover_image-shrink_600_2000/0/1669746580764?e=2147483647&v=beta&t=1gsLNYLqwau7-3cszokd_h7dADCNDPS0dTyPx6Op4XQ"
+        )
+
+        flask = SoftwareLanguages(
+            language_type="Microframework",
+            name="Flask",
+            logo="https://user-images.githubusercontent.com/51070104/268566349-c41e65a5-2ab9-4b54-8cbc-350ab6da746c.png"
+        )
+        db.session.add_all([javascript, css, sql, python, react, flask])
         db.session.commit()
 
         print("Finished seeding")

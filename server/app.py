@@ -8,7 +8,7 @@ import smtplib
 
 from email.mime.text import MIMEText
 
-from models import Profile, EmploymentHistory, KeyRoles, EmployeeCaseStudies, EmployerReference, CaseStudyRoles, Education, SocialMedia, CapstoneProjects, CapstoneProjectAchievments, CapstoneProjectContext, Charities, WorkCountries, Emails, CardOptions
+from models import Profile, EmploymentHistory, KeyRoles, EmployeeCaseStudies, EmployerReference, CaseStudyRoles, Education, SocialMedia, CapstoneProjects, CapstoneProjectAchievments, CapstoneProjectContext, Charities, WorkCountries, Emails, CardOptions, SoftwareLanguages
 class Profiles(Resource):
     def get(self):
         profiles = [profile.to_dict(rules=(
@@ -156,6 +156,17 @@ class CapstoneProject(Resource):
         capstone_information = [capstone_info.to_dict() for capstone_info in CapstoneProjects.query.all()]
         return capstone_information, 200
 
+class CapstoneProjectId(Resource):
+    def get(self, id):
+        project_info = CapstoneProjects.query.filter(CapstoneProjects.id==id).first()
+        if project_info:
+            return make_response(project_info.to_dict(rules=(
+                "-employer",
+                "-charity",
+                "-education",
+                "-capstone_achievment.capstone_project",
+            )))
+
 
 class CapstoneProjectAchievment(Resource):
     def get(self):
@@ -181,6 +192,11 @@ class CardOption(Resource):
     def get(self):
         card_options = [card_option.to_dict() for card_option in CardOptions.query.all()]
         return card_options, 200 
+
+class SofwareLanguage(Resource):
+    def get(self):
+        languages = [language.to_dict() for language in SoftwareLanguages.query.all()]
+        return languages, 200
 
 class Email(Resource):
     def get(self):
@@ -256,6 +272,7 @@ api.add_resource(EducationalHistory, '/education')
 api.add_resource(SocialMediaProfiles, '/socials')
 
 api.add_resource(CapstoneProject, '/projects')
+api.add_resource(CapstoneProjectId, '/projects/<int:id>')
 
 api.add_resource(CapstoneProjectAchievment, '/projectgoals')
 
@@ -266,6 +283,8 @@ api.add_resource(Charity, '/charities')
 api.add_resource(Countries, '/countries')
 
 api.add_resource(CardOption, '/options')
+
+api.add_resource(SofwareLanguage, '/languages')
 
 api.add_resource(Email, '/emails')
 if __name__ == "__main__":
