@@ -53,7 +53,17 @@ if __name__ == "__main__":
             role="Creating analytical cashflows",
             employer_id = 1
         )
-        db.session.add_all([esasRole1, esasRole2])
+
+        s7Role1 = KeyRoles(
+            role="Promoted sustainability projects in South Africa.",
+            charity_id=1
+        )
+
+        s7Role2 = KeyRoles(
+            role="Secured funding from European and African entities to fund projects.",
+            charity_id=1
+        )
+        db.session.add_all([esasRole1, esasRole2, s7Role1, s7Role2])
         db.session.commit()
 
         print("Seeding Case Studies")
@@ -78,7 +88,17 @@ if __name__ == "__main__":
             reference_image="https://media.licdn.com/dms/image/C5603AQF8Sas7UDtMdA/profile-displayphoto-shrink_200_200/0/1517497389698?e=2147483647&v=beta&t=b7AltaUuaOx-95Cyn9NuwdyQUCDzsFDPEPvVJKh6sJo",
             employer_id=1
         )
-        db.session.add_all([resatDuren])
+
+        sophiaLadha = EmployerReference(
+            title="Mrs",
+            first_name="Sophia",
+            last_name="Ladha",
+            position="Director",
+            email="sophia@gmail.com",
+            reference_image="https://solving7.green/wp-content/uploads/elementor/thumbs/Sophia-Ladha-oyic36r173c9mn1xhy5kbyyo6n8ng4bzppyg4m14f4.jpg",
+            charity_id=1
+        )
+        db.session.add_all([resatDuren, sophiaLadha])
         db.session.commit()
 
         print("Seeding case study roles")

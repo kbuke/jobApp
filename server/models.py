@@ -153,7 +153,11 @@ class EmployerReference(db.Model, SerializerMixin):
         "-key_roles",
         "-case_studies",
         "-reference",
-        "-employer",
+        "-employer.reference",
+        "-employer.start_date",
+        "-employer.end_date",
+        "-employer.role_description",
+        "-employer.id",
         "-charity",
     )
 

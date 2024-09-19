@@ -183,6 +183,18 @@ class Charity(Resource):
         charities = [charity.to_dict() for charity in Charities.query.all()]
         return charities, 200
 
+class CharityId(Resource):
+    def get(self, id):
+        charity_info = Charities.query.filter(Charities.id==id).first()
+        if charity_info:
+            return make_response(charity_info.to_dict(rules=(
+                "-key_roles.charity",
+                "-reference.charity",
+            )), 201)
+        return{
+            "error": "charity not found"
+        }, 404
+
 class Countries(Resource):
     def get(self):
         countries = [country.to_dict() for country in WorkCountries.query.all()]
@@ -279,6 +291,7 @@ api.add_resource(CapstoneProjectAchievment, '/projectgoals')
 api.add_resource(CapstoneProjectTypes, '/projecttypes')
 
 api.add_resource(Charity, '/charities')
+api.add_resource(CharityId, '/charities/<int:id>')
 
 api.add_resource(Countries, '/countries')
 
