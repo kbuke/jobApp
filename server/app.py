@@ -1,4 +1,4 @@
-from flask import request, make_response 
+from flask import request, make_response, session
 
 from flask_restful import Resource 
 
@@ -210,6 +210,33 @@ class SofwareLanguage(Resource):
         languages = [language.to_dict() for language in SoftwareLanguages.query.all()]
         return languages, 200
 
+class Login(Resource):
+    def post(self):
+        json = request.get_json()
+        email = json.get("email")
+        password = json.get("password")
+
+        if not email or not password:
+            return {"error": "Email and Password required"}, 400
+        
+        user = Profile.query.filter(Profile.email == email).first()
+
+        if user and user.authenticate(password):
+            session['user_id'] = user.id 
+            return user.to_dict(), 200 
+        
+        return {"error": "Inavlid username or password"}, 401
+
+class CheckSession(Resource):
+    def get(self):
+        user_id = session.get('user_id')
+        if user_id:
+            user = Users.query.filter(Users.id == user_id).first()
+            if user:
+                return user.to_dict(), 200
+        return {"message": "Unauthorized user"}
+
+
 class Email(Resource):
     def get(self):
         emails = [email.to_dict() for email in Emails.query.all()]
@@ -298,6 +325,10 @@ api.add_resource(Countries, '/countries')
 api.add_resource(CardOption, '/options')
 
 api.add_resource(SofwareLanguage, '/languages')
+
+api.add_resource(Login, '/login')
+
+api.add_resource(CheckSession, '/check_session')
 
 api.add_resource(Email, '/emails')
 if __name__ == "__main__":
