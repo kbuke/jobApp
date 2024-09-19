@@ -158,7 +158,7 @@ class EmployerReference(db.Model, SerializerMixin):
         "-employer.end_date",
         "-employer.role_description",
         "-employer.id",
-        "-charity",
+        "-charity.reference",
     )
 
     #Add validations
