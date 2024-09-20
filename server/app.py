@@ -15,7 +15,33 @@ class Profiles(Resource):
             "-_password_hash",
         )) for profile in Profile.query.all()]
         return profiles, 200
+
+class ProfilesId(Resource):
+    def get(self, id):
+        user_info = Profile.query.filter(Profile.id==id).first()
+        if user_info:
+            return make_response(user_info.to_dict(), 201)
+        return {
+            "error": "user not found"
+        }, 404
     
+    def patch(self, id):
+        data=request.get_json()
+        user_info=Profile.query.filter(Profile.id==id).first()
+        if user_info:
+            try:
+                for attr in data:
+                    setattr(user_info, attr, data[attr])
+                db.session.add(user_info)
+                db.session.commit()
+                return make_response(user_info.to_dict(), 202)
+            except ValueError:
+                return{
+                    "error": ["Validation Error"]
+                }, 400
+        return{
+            "error": "Profile not found"
+        }, 404
 
 #------------------------------------Employers Models------------------------------------
 class Employers(Resource):
@@ -60,6 +86,7 @@ class EmployersId(Resource):
         return{
             "error": "employer not found"
         }, 404
+    
 
 
 #------------------------------------Roles Models------------------------------------
@@ -291,6 +318,7 @@ class Email(Resource):
 
 
 api.add_resource(Profiles, '/profiles')
+api.add_resource(ProfilesId, '/profiles/<int:id>')
 
 api.add_resource(Employers, '/employers')
 api.add_resource(EmployersId, '/employers/<int:id>')
