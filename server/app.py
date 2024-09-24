@@ -1,5 +1,7 @@
 from flask import request, make_response, session
 
+from datetime import datetime
+
 from flask_restful import Resource 
 
 from config import app, db, api, os 
@@ -52,19 +54,26 @@ class Employers(Resource):
     def post(self):
         json = request.get_json()
         try:
+            # Convert the string dates to datetime.date
+            start_date = datetime.strptime(json.get("startDate"), "%Y-%m-%d").date()
+            end_date = None
+            if json.get("endDate"):
+                end_date = datetime.strptime(json.get("endDate"), "%Y-%m-%d").date()
+
             new_employer = EmploymentHistory(
                 name=json.get("employerName"),
                 logo=json.get("employerLogo"),
-                start_date=json.get("startDate"),
-                end_date=json.get("endDate"),
+                start_date=start_date,
+                end_date=end_date,
                 role=json.get("employerRole"),
                 role_description=json.get("roleDescription")
             )
             db.session.add(new_employer)
             db.session.commit()
             return new_employer.to_dict(), 201 
+
         except ValueError as e:
-            return{
+            return {
                 "error": [str(e)]
             }, 400
 
@@ -95,6 +104,23 @@ class EmployerRoles(Resource):
         roles = [role.to_dict() for role in KeyRoles.query.all()]
         return roles, 200
 
+    def post(self):
+        json=request.get_json()
+        try:
+            new_role = KeyRoles(
+                role=json.get("newRole"),
+                employer_id=json.get("selectedBusinessId"),
+                charity_id=json.get("selectedCharityId")
+            )
+            db.session.add(new_role)
+            db.session.commit()
+            return new_role.to_dict(), 201 
+        except ValueError as e:
+            return{
+                "error": [str(e)]
+            }, 400
+
+
 class EmployerRolesId(Resource):
     def get(self, id):
         role_info = KeyRoles.query.filter(KeyRoles.id==id).first()
@@ -107,6 +133,37 @@ class EmployerRolesId(Resource):
         return {
             "error": "role not found"
         }, 404
+    
+    def patch(self, id):
+        data=request.get_json()
+        role_info = KeyRoles.query.filter(KeyRoles.id==id).first()
+        if role_info:
+            try:
+                for attr in data:
+                    setattr(role_info, attr, data[attr])
+                db.session.add(role_info)
+                db.session.commit()
+                return make_response(role_info.to_dict(), 202)
+            except ValueError:
+                return{
+                    "error": ["Validation Error"]
+                }, 400
+        return{
+            "error": "Role not found"
+        }, 404
+    
+    def delete(self, id):
+        role_info = KeyRoles.query.filter(KeyRoles.id == id).first()
+        if role_info:
+            db.session.delete(role_info)
+            db.session.commit()
+            return{
+                "message": "Employed role deleted"
+            }, 200
+        return {
+            "error": "Employed Role not found"
+        }, 404
+    
 
 
 
@@ -114,6 +171,26 @@ class EmployerCaseStudy(Resource):
     def get(self):
         case_studies = [case_study.to_dict() for case_study in EmployeeCaseStudies.query.all()]
         return case_studies, 200
+    
+    def post(self):
+        json = request.get_json()
+        try:
+            new_study = EmployeeCaseStudies(
+                title=json.get("newTitle"),
+                country=json.get("newCountry"),
+                city=json.get("newCity"),
+                case_study_info=json.get("studyInfo"),
+                case_study_img=json.get("newImg"),
+                employer_id=json.get("selectedBusinessId"),
+                charity_id=json.get("selectedCharityId"),
+            )
+            db.session.add(new_study)
+            db.session.commit()
+            return new_study.to_dict(), 201 
+        except ValueError as e:
+            return{
+                "error": [str(e)]
+            }, 400
 
 class EmployerCaseStudyId(Resource):
     def get(self, id):
@@ -155,6 +232,21 @@ class WorkCaseStudy(Resource):
     def get(self):
         case_study_information = [case_study_info.to_dict() for case_study_info in CaseStudyRoles.query.all()]
         return case_study_information, 200 
+    
+    def post(self):
+        json=request.get_json()
+        try:
+            new_role = CaseStudyRoles(
+                role = json.get("newRole"),
+                case_study_id = json.get("selectCaseStudyId")
+            )
+            db.session.add(new_role)
+            db.session.commit()
+            return new_role.to_dict(), 201
+        except ValueError as e:
+            return{
+                "error": [str(e)]
+            }, 400
 
 class WorkCaseStudyId(Resource):
     def get(self, id):
@@ -164,6 +256,24 @@ class WorkCaseStudyId(Resource):
         return{
             "error": "role not found"
         }, 404
+
+    def patch(self, id):
+        data=request.get_json()
+        case_study_roles = CaseStudyRoles.query.filter(CaseStudyRoles.id==id).first()
+        if case_study_roles:
+            try:
+                for attr in data:
+                    setattr(case_study_roles, attr, data[attr])
+                db.session.add(case_study_roles)
+                db.session.commit()
+                return make_response(case_study_roles.to_dict(), 202)
+            except ValueError:
+                return{
+                    "error": ["Validation Error"]
+                }, 400
+            return {
+                "error": "Case Study Role not found"
+            }, 404
 
 
 
@@ -254,11 +364,19 @@ class Login(Resource):
         
         return {"error": "Inavlid username or password"}, 401
 
+class Logout(Resource):
+    def delete(self):
+        user_id = session.get("user_id")
+        if user_id:
+            session.pop("user_id")
+            return {}, 204 
+        return {"message": "Unauthorized"}, 401
+
 class CheckSession(Resource):
     def get(self):
         user_id = session.get('user_id')
         if user_id:
-            user = Users.query.filter(Users.id == user_id).first()
+            user = Profile.query.filter(Profile.id == user_id).first()
             if user:
                 return user.to_dict(), 200
         return {"message": "Unauthorized user"}
@@ -333,6 +451,7 @@ api.add_resource(EmployerReferences, '/employerreference')
 api.add_resource(EmployerReferencesId, '/employerreference/<int:id>')
 
 api.add_resource(WorkCaseStudy, '/workcasestudyrole')
+api.add_resource(WorkCaseStudyId, '/workcasestudyrole/<int:id>')
 
 api.add_resource(EducationalHistory, '/education')
 
@@ -355,6 +474,8 @@ api.add_resource(CardOption, '/options')
 api.add_resource(SofwareLanguage, '/languages')
 
 api.add_resource(Login, '/login')
+
+api.add_resource(Logout, '/logout')
 
 api.add_resource(CheckSession, '/check_session')
 
