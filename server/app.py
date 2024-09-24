@@ -333,6 +333,24 @@ class SocialMediaProfiles(Resource):
                 "error": [str(e)]
             }, 400
 
+class SocialMediaProfilesId(Resource):
+    def get(self, id):
+        socials_info = SocialMedia.query.filter(SocialMedia.id==id).first()
+        if socials_info:
+            return make_response(socials_info.to_dict())
+    
+    def delete(self, id):
+        socials_info = SocialMedia.query.filter(SocialMedia.id==id).first()
+        if socials_info:
+            db.session.delete(socials_info)
+            db.session.commit()
+            return{
+                "message": "Socials profile deleted"
+            }, 200
+        return {
+            "error": "Socials profile not found"
+        }, 404
+
 
 class CapstoneProject(Resource):
     def get(self):
@@ -502,6 +520,7 @@ api.add_resource(WorkCaseStudyId, '/workcasestudyrole/<int:id>')
 api.add_resource(EducationalHistory, '/education')
 
 api.add_resource(SocialMediaProfiles, '/socials')
+api.add_resource(SocialMediaProfilesId, '/socials/<int:id>')
 
 api.add_resource(CapstoneProject, '/projects')
 api.add_resource(CapstoneProjectId, '/projects/<int:id>')
