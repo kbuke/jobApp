@@ -10,6 +10,7 @@ import smtplib
 
 from email.mime.text import MIMEText
 
+
 from models import Profile, EmploymentHistory, KeyRoles, EmployeeCaseStudies, EmployerReference, CaseStudyRoles, Education, SocialMedia, CapstoneProjects, CapstoneProjectAchievments, CapstoneProjectContext, Charities, WorkCountries, Emails, CardOptions, SoftwareLanguages
 class Profiles(Resource):
     def get(self):
@@ -281,6 +282,35 @@ class EducationalHistory(Resource):
     def get(self):
         education_information = [education_info.to_dict() for education_info in Education.query.all()]
         return education_information, 200 
+    
+    def post(self):
+        json = request.get_json()
+        try:
+            start_date = datetime.strptime(json.get("startDate"), "%Y-%m-%d").date()
+            end_date = None
+            if json.get("endDate"):
+                end_date = datetime.strptime(json.get("endDate"), "%Y-%m-%d").date()
+
+            new_school = Education(
+                school=json.get("schoolName"),
+                subject_studied=json.get("subjects"),  # corrected field
+                grade=json.get("grade"),
+                school_image=json.get("schoolLogo"),
+                city=json.get("city"),
+                country=json.get("country"),
+                start_date=start_date,
+                end_date=end_date
+            )
+            db.session.add(new_school)
+            db.session.commit()
+            return new_school.to_dict(), 201
+
+        except ValueError as e:
+            return {
+                "error": [str(e)]
+            }, 400
+
+    
 
 
 class SocialMediaProfiles(Resource):
