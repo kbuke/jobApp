@@ -317,6 +317,22 @@ class SocialMediaProfiles(Resource):
     def get(self):
         social_media_information = [social_media_info.to_dict() for social_media_info in SocialMedia.query.all()]
         return social_media_information, 200
+    
+    def post(self):
+        json = request.get_json()
+        try:
+            new_social = SocialMedia(
+                url=json.get("newSocial"),
+                logo=json.get("newLogo")
+            )
+            db.session.add(new_social)
+            db.session.commit()
+            return new_social.to_dict(), 201 
+        except ValueError as e:
+            return{
+                "error": [str(e)]
+            }, 400
+
 
 class CapstoneProject(Resource):
     def get(self):
