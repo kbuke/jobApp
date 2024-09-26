@@ -107,20 +107,37 @@ class EmployerRoles(Resource):
         return roles, 200
 
     def post(self):
-        json=request.get_json()
+        json = request.get_json()
+        print("Received JSON:", json)  # Debugging
+
         try:
+            # Ensure the charity_id is passed correctly
+            charity_id = json.get("selectedCharityId")
+            if not charity_id:
+                return {"error": "Charity ID is required."}, 400
+
+            if not json.get("newRole"):
+                return {"error": "Role description is required."}, 400
+
+            # Create the new role
             new_role = KeyRoles(
                 role=json.get("newRole"),
-                employer_id=json.get("selectedBusinessId"),
-                charity_id=json.get("selectedCharityId")
+                charity_id=charity_id  # Explicitly assign charity_id here
             )
+        
             db.session.add(new_role)
             db.session.commit()
-            return new_role.to_dict(), 201 
+        
+            return new_role.to_dict(), 201
+    
         except ValueError as e:
-            return{
-                "error": [str(e)]
-            }, 400
+            print(f"Validation Error: {e}")  # Detailed logging
+            return {"error": [str(e)]}, 400
+    
+        except Exception as e:
+            print(f"Unexpected Error: {e}")  # Catching general errors
+            return {"error": "An unexpected error occurred."}, 500
+
 
 
 class EmployerRolesId(Resource):
@@ -226,6 +243,36 @@ class EmployerReferencesId(Resource):
             )), 201)
         return {
             "error": "reference not found"
+        }, 404
+    
+    def patch(self, id):
+        data=request.get_json()
+        ref_info = EmployerReference.query.filter(EmployerReference.id==id).first()
+        if ref_info:
+            try:
+                for attr in data:
+                    setattr(ref_info, attr, data[attr])
+                db.session.add(ref_info)
+                db.session.commit()
+                return make_response(ref_info.to_dict(), 202)
+            except ValueError:
+                return{
+                    "error": ["Validation Error"]
+                }, 400
+        return {
+            "error": "Reference not found"
+        }, 404
+    
+    def delete(self, id):
+        ref_info = EmployerReference.query.filter(EmployerReference.id==id).first()
+        if ref_info:
+            db.session.delete(ref_info)
+            db.session.commit()
+            return {
+                "message": "Reference deleted"
+            }, 200 
+        return {
+            "error": "Reference not found"
         }, 404
 
 

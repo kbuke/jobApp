@@ -82,19 +82,16 @@ class KeyRoles(db.Model, SerializerMixin):
     #Add validation methods
     @validates("employer_id", "charity_id")
     def validate_employer_or_charity(self, key, value):
-        #Get current employer and charity ids
-        employer_id = self.employer_id
-        charity_id = self.charity_id 
-
-        if key == "employer_id":
-            employer_id = value 
-        elif key == "charity_id":
-            charity_id = value 
-        
-        if employer_id is None and charity_id is None:
-            raise ValueError("There must be at least one employer or charity id")
-
+        # Validate that at least one field is provided, only when the current field is None
+        if key == "employer_id" and value is None and not self.charity_id:
+            raise ValueError("At least one of employer_id or charity_id must be provided.")
+    
+        if key == "charity_id" and value is None and not self.employer_id:
+            raise ValueError("At least one of employer_id or charity_id must be provided.")
+    
         return value
+
+
 
 #-------------------------Set up prev employment case studies-------------------------
 class EmployeeCaseStudies(db.Model, SerializerMixin):
@@ -121,18 +118,14 @@ class EmployeeCaseStudies(db.Model, SerializerMixin):
     #Add validation 
     @validates("employer_id", "charity_id")
     def validate_employer_or_charity(self, key, value):
-        employer_id = self.employer_id 
-        charity_id = self.charity_id
-
-        if key == "employer_id":
-            employer_id = value 
-        elif key == "charity_id":
-            charity_id = value 
-        
-        if employer_id is None and charity_id is None:
-            raise ValueError("At least one employer or charity id must be given")
-        
-        return value 
+        # Validate that at least one field is provided, only when the current field is None
+        if key == "employer_id" and value is None and not self.charity_id:
+            raise ValueError("At least one of employer_id or charity_id must be provided.")
+    
+        if key == "charity_id" and value is None and not self.employer_id:
+            raise ValueError("At least one of employer_id or charity_id must be provided.")
+    
+        return value
 
 #-------------------------Set up employers references-------------------------
 class EmployerReference(db.Model, SerializerMixin):
