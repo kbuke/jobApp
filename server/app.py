@@ -12,6 +12,7 @@ from email.mime.text import MIMEText
 
 
 from models import Profile, EmploymentHistory, KeyRoles, EmployeeCaseStudies, EmployerReference, CaseStudyRoles, Education, SocialMedia, CapstoneProjects, CapstoneProjectAchievments, CapstoneProjectContext, Charities, WorkCountries, Emails, CardOptions, SoftwareLanguages
+
 class Profiles(Resource):
     def get(self):
         profiles = [profile.to_dict(rules=(
@@ -384,6 +385,48 @@ class Charity(Resource):
         charities = [charity.to_dict() for charity in Charities.query.all()]
         return charities, 200
 
+    def post(self):
+        json = request.get_json()
+
+        try:
+            # Parse start date
+            start_date = datetime.strptime(json.get("start_date"), "%Y-%m-%d").date()
+
+            # Handle end date: either a valid date or "Present"
+            end_date = None
+            end_date_input = json.get("end_date")
+            if end_date_input:
+                if end_date_input == "Present":
+                    end_date = "Present"  # Store "Present" as a string
+                else:
+                    end_date = str(datetime.strptime(end_date_input, "%Y-%m-%d").date())
+
+            # Create new charity entry
+            new_charity = Charities(
+                name=json.get("name"),
+                logo=json.get("logo"),
+                charity_description=json.get("description"),
+                role=json.get("role"),
+                start_date=start_date,
+                end_date=end_date  # Set end date (either a date string or "Present")
+            )
+
+            # Save to the database
+            db.session.add(new_charity)
+            db.session.commit()
+
+            return new_charity.to_dict(), 201
+
+        except ValueError as e:
+            return {
+                "error": f"Invalid date format: {str(e)}"
+            }, 400
+
+        except Exception as e:
+            return {
+                "error": f"Something went wrong: {str(e)}"
+            }, 500
+
 class CharityId(Resource):
     def get(self, id):
         charity_info = Charities.query.filter(Charities.id==id).first()
@@ -395,6 +438,51 @@ class CharityId(Resource):
         return{
             "error": "charity not found"
         }, 404
+    
+    def delete(self, id):
+        charity_info = Charities.query.filter(Charities.id==id).first()
+        if charity_info:
+            db.session.delete(charity_info)
+            db.session.commit()
+            return{
+                "message": "Charity not deleted"
+            }, 200
+        return {
+            "error": "Charity not found"
+        }, 404
+
+    def patch(self, id):
+        data = request.get_json()
+        charity_info = Charities.query.filter(Charities.id == id).first()
+        
+        if charity_info:
+            try:
+                # Convert start_date and end_date to Python date objects if they are not "Present"
+                if "start_date" in data:
+                    try:
+                        data["start_date"] = datetime.strptime(data["start_date"], "%Y-%m-%d").date()
+                    except ValueError:
+                        return {"error": "Invalid start_date format"}, 400
+                
+                if "end_date" in data:
+                    if data["end_date"] != "Present":
+                        try:
+                            data["end_date"] = datetime.strptime(data["end_date"], "%Y-%m-%d").date()
+                        except ValueError:
+                            return {"error": "Invalid end_date format"}, 400
+
+                # Update charity attributes
+                for attr in data:
+                    setattr(charity_info, attr, data[attr])
+                
+                db.session.add(charity_info)
+                db.session.commit()
+
+                return make_response(charity_info.to_dict(), 202)
+            except ValueError:
+                return {"error": ["Validation error"]}, 400
+        return {"error": "Charity not found"}, 404
+    
 
 class Countries(Resource):
     def get(self):

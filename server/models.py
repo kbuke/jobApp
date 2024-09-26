@@ -5,6 +5,7 @@ from sqlalchemy import Date
 from sqlalchemy.ext.hybrid import hybrid_property
 from config import db, bcrypt
 import re
+from datetime import datetime
 
 #-------------------------Set up my profile intro-------------------------
 class Profile(db.Model, SerializerMixin):
@@ -273,6 +274,9 @@ class Charities(db.Model, SerializerMixin):
     name=db.Column(db.String, nullable=False)
     logo=db.Column(db.String, nullable=False)
     charity_description=db.Column(db.String, nullable=False)
+    role=db.Column(db.String, nullable=False, server_default="")
+    start_date=db.Column(db.Date, nullable=False, server_default="")
+    end_date=db.Column(db.String, nullable=False, server_default="Present")
 
     key_roles = db.relationship("KeyRoles", backref="charity")
     case_studies = db.relationship("EmployeeCaseStudies", backref="charity")
@@ -283,6 +287,18 @@ class Charities(db.Model, SerializerMixin):
         "-case_studies",
         "-reference",
     )
+
+    @validates('end_date')
+    def validate_end_date(self, key, value):
+        if value == "Present":
+            return value
+        else:
+            try:
+                # Check if the string is a valid date in YYYY-MM-DD format
+                datetime.strptime(value, "%Y-%m-%d")
+                return value
+            except ValueError:
+                raise ValueError("end_date must be 'Present' or a valid date in the format 'YYYY-MM-DD'")
 
 #------------------------Right to work---------------------------------
 class WorkCountries(db.Model, SerializerMixin):

@@ -6,6 +6,7 @@ from config import db
 
 from datetime import date
 
+
 if __name__ == "__main__":
     with app.app_context():
         print("Starting seed...")
@@ -118,9 +119,9 @@ if __name__ == "__main__":
         flatIron = Education(
             school="Flat Iron School",
             subject_studied="Software Engineering",
-            start_date = date(2023, 6, 24),
-            end_date = date(2024, 9, 3),
-            school_image = "https://upload.wikimedia.org/wikipedia/commons/6/61/FS_wiki.png",
+            start_date=date(2023, 6, 24),
+            end_date=date(2024, 9, 3),
+            school_image="https://upload.wikimedia.org/wikipedia/commons/6/61/FS_wiki.png",
             city="Remote"
         )
 
@@ -191,6 +192,9 @@ if __name__ == "__main__":
             name="Solving 7",
             logo="https://solving7.green/wp-content/uploads/2020/11/Solving7-Logo-Dark.png",
             charity_description="An NGO based in South Africa. They turn number 7 plastics into school desks which they supply nation wide.",
+            role="Community Programme Lead",
+            start_date=date(2023, 3, 15),
+            end_date=str(date(2024, 5, 28))
         )
         db.session.add_all([solving_7])
         db.session.commit()
