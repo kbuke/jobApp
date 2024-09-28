@@ -123,7 +123,6 @@ class EmployerRoles(Resource):
             if not json.get("newRole"):
                 return {"error": "Role description is required."}, 400
             
-            breakpoint()
 
             # Create the new role based on which ID is present
             new_role = KeyRoles(
@@ -457,7 +456,16 @@ class CapstoneProjectId(Resource):
             return make_response(project_info.to_dict(rules=(
                 "-employer",
                 "-charity",
-                "-education",
+
+                "-education.capstone_project",
+                "-education.city",
+                "-education.country",
+                "-education.end_date",
+                "-education.grade",
+                "-education.school",
+                "-education.start_date",
+                "-education.subject_studied",
+
                 "-capstone_achievment.capstone_project",
             )))
 
@@ -503,6 +511,61 @@ class CapstoneProjectAchievment(Resource):
     def get(self):
         capstone_achievment_information = [capstone_achievment_info.to_dict() for capstone_achievment_info in CapstoneProjectAchievments.query.all()]
         return capstone_achievment_information, 200
+    
+    def post(self):
+        json=request.get_json()
+        try:
+            new_achievment = CapstoneProjectAchievments(
+                achievment=json.get("newAchievment"),
+                image=json.get("newImg"),
+                capstone_id=json.get("projectId")
+            )
+            db.session.add(new_achievment)
+            db.session.commit()
+            return new_achievment.to_dict(), 201
+        except ValueError as e:
+            return{
+                "error": [str(e)]
+            }, 400
+
+class CapstoneProjectAchievmentId(Resource):
+    def get(self, id):
+        achievment_info = CapstoneProjectAchievments.query.filter(CapstoneProjectAchievments.id==id).first()
+        if achievment_info:
+            return make_response(achievment_info.to_dict(), 201)
+        return {
+            "error": "achievment not found"
+        }, 404
+    
+    def patch(self, id):
+        data=request.get_json()
+        achievment_info=CapstoneProjectAchievments.query.filter(CapstoneProjectAchievments.id==id).first()
+        if achievment_info:
+            try:
+                for attr in data:
+                    setattr(achievment_info, attr, data[attr])
+                db.session.add(achievment_info)
+                db.session.commit()
+                return make_response(achievment_info.to_dict(), 202)
+            except ValueError:
+                return{
+                    "error": ["Validation Error"]
+                }, 400
+        return {
+            "error": "Achievment not found"
+        }, 404
+    
+    def delete(self, id):
+        achievment_info=CapstoneProjectAchievments.query.filter(CapstoneProjectAchievments.id==id).first()
+        if achievment_info:
+            db.session.delete(achievment_info)
+            db.session.commit()
+            return {
+                "message": "Achievment deleted"
+            }, 200
+        return {
+            "error": "Achievment not found"
+        }, 404
     
 
 
@@ -748,6 +811,7 @@ api.add_resource(CapstoneProject, '/projects')
 api.add_resource(CapstoneProjectId, '/projects/<int:id>')
 
 api.add_resource(CapstoneProjectAchievment, '/projectgoals')
+api.add_resource(CapstoneProjectAchievmentId, '/projectgoals/<int:id>')
 
 api.add_resource(CapstoneProjectTypes, '/projecttypes')
 

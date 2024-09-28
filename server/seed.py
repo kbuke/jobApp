@@ -181,11 +181,13 @@ if __name__ == "__main__":
         print("Seeding capstone achievments")
         nihon_go_success1 = CapstoneProjectAchievments(
             achievment = "Leart how to use Google Maps API",
+            image="https://i.pcmag.com/imagery/reviews/05BN3njlO8GzG0L7AvjC5Od-5.fit_lim.size_1200x630.v1611688960.jpg",
             capstone_id = 1
         )
 
         nihon_go_success2 = CapstoneProjectAchievments(
             achievment="Learnt how to allow users to upload pictures locally to my app.",
+            image="https://blogassets.airtel.in/wp-content/uploads/2022/06/How-to-upload-photos-to-Google.jpg",
             capstone_id=1
         )
         db.session.add_all([nihon_go_success1, nihon_go_success2])

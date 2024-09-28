@@ -239,6 +239,7 @@ class CapstoneProjectAchievments(db.Model, SerializerMixin):
 
     id=db.Column(db.Integer, primary_key=True)
     achievment = db.Column(db.String, nullable=False)
+    image = db.Column(db.String, nullable=True, server_default="")
 
     capstone_id = db.Column(db.Integer, db.ForeignKey("capstoneProject.id"), nullable=False)
 
