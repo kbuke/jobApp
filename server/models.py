@@ -6,6 +6,7 @@ from sqlalchemy.ext.hybrid import hybrid_property
 from config import db, bcrypt
 import re
 from datetime import datetime
+from sqlalchemy import event
 
 #-------------------------Set up my profile intro-------------------------
 class Profile(db.Model, SerializerMixin):
@@ -64,32 +65,27 @@ class EmploymentHistory(db.Model, SerializerMixin):
     )
 
 #-------------------------Set up employment roles-------------------------
+
 class KeyRoles(db.Model, SerializerMixin):
     __tablename__ = "keyRoles"
 
-    id=db.Column(db.Integer, primary_key=True)
-    role=db.Column(db.String, nullable=False)
+    id = db.Column(db.Integer, primary_key=True)
+    role = db.Column(db.String, nullable=False)
 
-    #Add relations
-    employer_id=db.Column(db.Integer, db.ForeignKey("employmentHistory.id"), nullable=True)
-    charity_id=db.Column(db.Integer, db.ForeignKey("charities.id"), nullable=True)
+    # Add relations
+    employer_id = db.Column(db.Integer, db.ForeignKey("employmentHistory.id"), nullable=True)
+    charity_id = db.Column(db.Integer, db.ForeignKey("charities.id"), nullable=True)
 
-    serialize_rules = (
-        "-employer",
-        "-charity",
-    )
+    serialize_rules = ("-employer", "-charity",)
 
-    #Add validation methods
-    @validates("employer_id", "charity_id")
-    def validate_employer_or_charity(self, key, value):
-        # Validate that at least one field is provided, only when the current field is None
-        if key == "employer_id" and value is None and not self.charity_id:
-            raise ValueError("At least one of employer_id or charity_id must be provided.")
-    
-        if key == "charity_id" and value is None and not self.employer_id:
-            raise ValueError("At least one of employer_id or charity_id must be provided.")
-    
-        return value
+# Add validation through event listener
+@event.listens_for(KeyRoles, 'before_insert')
+@event.listens_for(KeyRoles, 'before_update')
+def validate_employer_or_charity(mapper, connection, target):
+    # Check that at least one of employer_id or charity_id is provided
+    if not target.employer_id and not target.charity_id:
+        raise ValueError("At least one of employer_id or charity_id must be provided.")
+
 
 
 
@@ -97,14 +93,14 @@ class KeyRoles(db.Model, SerializerMixin):
 class EmployeeCaseStudies(db.Model, SerializerMixin):
     __tablename__ = "employmentCaseStudy"
 
-    id=db.Column(db.Integer, primary_key=True)
-    title=db.Column(db.String, nullable=False)
-    country=db.Column(db.String, nullable=True)
-    city=db.Column(db.String, nullable=True)
-    case_study_info=db.Column(db.String, nullable=False)
-    case_study_img=db.Column(db.String, nullable=True)
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String, nullable=False)
+    country = db.Column(db.String, nullable=True)
+    city = db.Column(db.String, nullable=True)
+    case_study_info = db.Column(db.String, nullable=False)
+    case_study_img = db.Column(db.String, nullable=True)
 
-    #Add relationship
+    # Add relationship
     employer_id = db.Column(db.Integer, db.ForeignKey("employmentHistory.id"), nullable=True)
     charity_id = db.Column(db.Integer, db.ForeignKey("charities.id"), nullable=True)
     case_study_role = db.relationship("CaseStudyRoles", backref="caseStudy")
@@ -115,17 +111,15 @@ class EmployeeCaseStudies(db.Model, SerializerMixin):
         "-case_study_role",
     )
 
-    #Add validation 
-    @validates("employer_id", "charity_id")
-    def validate_employer_or_charity(self, key, value):
-        # Validate that at least one field is provided, only when the current field is None
-        if key == "employer_id" and value is None and not self.charity_id:
-            raise ValueError("At least one of employer_id or charity_id must be provided.")
-    
-        if key == "charity_id" and value is None and not self.employer_id:
-            raise ValueError("At least one of employer_id or charity_id must be provided.")
-    
-        return value
+    # Add validation 
+    # Add validation through event listener
+@event.listens_for(KeyRoles, 'before_insert')
+@event.listens_for(KeyRoles, 'before_update')
+def validate_employer_or_charity(mapper, connection, target):
+    # Check that at least one of employer_id or charity_id is provided
+    if not target.employer_id and not target.charity_id:
+        raise ValueError("At least one of employer_id or charity_id must be provided.")
+
 
 #-------------------------Set up employers references-------------------------
 class EmployerReference(db.Model, SerializerMixin):
@@ -222,9 +216,11 @@ class CapstoneProjects(db.Model, SerializerMixin):
 
     id=db.Column(db.Integer, primary_key=True)
     name=db.Column(db.String, nullable=False)
-    logo=db.Column(db.String, nullable=True)
     git_hub_link=db.Column(db.String, nullable=True)
     description=db.Column(db.String, nullable=False, server_default="")
+    blog_link=db.Column(db.String, nullable=True)
+    date=db.Column(db.Date, nullable=False, server_default="")
+    image=db.Column(db.String, nullable=False, server_default="")
 
     employer_id = db.Column(db.Integer, db.ForeignKey("employmentHistory.id"), nullable=True)
     education_id = db.Column(db.Integer, db.ForeignKey("education.id"), nullable=True)

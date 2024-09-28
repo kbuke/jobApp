@@ -76,7 +76,16 @@ if __name__ == "__main__":
             case_study_img="https://www.esas.com.tr/Uploads/12-stanhope-gate-w9L5Por8.png",
             employer_id=1
         )
-        db.session.add_all([stanhopeGate])
+
+        community_hire = EmployeeCaseStudies(
+            title="Local Community Hire",
+            country="South Africa",
+            city="Johannesburg",
+            case_study_info="Employed local people for several roles",
+            case_study_img="https://solving7.green/wp-content/uploads/2020/11/DSC8097-2.jpg",
+            charity_id=1
+        )
+        db.session.add_all([stanhopeGate, community_hire])
         db.session.commit()
 
         print("Seeding Employee References")
@@ -112,7 +121,12 @@ if __name__ == "__main__":
             role="Negotiated 4 pre-lets with future tenants.",
             case_study_id=1
         )
-        db.session.add_all([stanhopeRole1, stanhopeRole2])
+
+        community_employment = CaseStudyRoles(
+            role="Employed locals to help collect waste.",
+            case_study_id=2
+        )
+        db.session.add_all([stanhopeRole1, stanhopeRole2, community_employment])
         db.session.commit()
 
         print("Seeding educational information")
@@ -156,7 +170,10 @@ if __name__ == "__main__":
             name="Nihon-Go",
             git_hub_link="https://github.com/kbuke/nihongo",
             education_id=1,
-            description="I created a social-media/travel application centered around Japanese travel."
+            description="I created a social-media/travel application centered around Japanese travel.",
+            blog_link="https://medium.com/@kaanbuke/nihon-go-00826ac9a073",
+            date= date(2024, 9, 4),
+            image="https://i.ibb.co/289N5YB/nihon-Go-Logo.png"
         )
         db.session.add_all([nihonGo])
         db.session.commit()
