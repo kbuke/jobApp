@@ -1,4 +1,4 @@
-from flask import request, make_response, session
+from flask import request, make_response, session, render_template
 
 from datetime import datetime
 
