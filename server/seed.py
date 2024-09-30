@@ -45,6 +45,18 @@ if __name__ == "__main__":
         db.session.add_all([esas])
         db.session.commit()
 
+        print("Seeding charities")
+        solving_7 = Charities(
+            name="Solving 7",
+            logo="https://solving7.green/wp-content/uploads/2020/11/Solving7-Logo-Dark.png",
+            charity_description="An NGO based in South Africa. They turn number 7 plastics into school desks which they supply nation wide.",
+            role="Community Programme Lead",
+            start_date=date(2023, 3, 15),
+            end_date=str(date(2024, 5, 28))
+        )
+        db.session.add_all([solving_7])
+        db.session.commit()
+
         print("Seeding key roles")
         esasRole1 = KeyRoles(
             role="Keeping a watchful eye on the European and North American commercial real estate markets",
@@ -206,17 +218,6 @@ if __name__ == "__main__":
         db.session.add_all([nihon_go_context1, nihon_go_context2])
         db.session.commit()
 
-        print("Seeding charities")
-        solving_7 = Charities(
-            name="Solving 7",
-            logo="https://solving7.green/wp-content/uploads/2020/11/Solving7-Logo-Dark.png",
-            charity_description="An NGO based in South Africa. They turn number 7 plastics into school desks which they supply nation wide.",
-            role="Community Programme Lead",
-            start_date=date(2023, 3, 15),
-            end_date=str(date(2024, 5, 28))
-        )
-        db.session.add_all([solving_7])
-        db.session.commit()
 
         print("Seeding Countries")
         eu = WorkCountries(

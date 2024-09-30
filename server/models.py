@@ -5,7 +5,7 @@ from sqlalchemy import Date
 from sqlalchemy.ext.hybrid import hybrid_property
 from config import db, bcrypt
 import re
-from datetime import datetime
+from datetime import datetime, date
 from sqlalchemy import event
 
 #-------------------------Set up my profile intro-------------------------
@@ -13,10 +13,10 @@ class Profile(db.Model, SerializerMixin):
     __tablename__ = "profile"
 
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.Integer, nullable=False)
+    name = db.Column(db.String, nullable=False)
     profile_bio = db.Column(db.String, nullable=False)
     employed = db.Column(db.Boolean, nullable=False)
-    looking_work = db.Column(db.Boolean, nullable=False, server_default="")
+    looking_work = db.Column(db.Boolean, nullable=False, server_default="false")
     _password_hash = db.Column(db.String, nullable=False)
     home_town = db.Column(db.String, nullable=True)
     home_country = db.Column(db.String, nullable=True)
@@ -211,7 +211,7 @@ class CapstoneProjects(db.Model, SerializerMixin):
     git_hub_link=db.Column(db.String, nullable=True)
     description=db.Column(db.String, nullable=False, server_default="")
     blog_link=db.Column(db.String, nullable=True)
-    date=db.Column(db.Date, nullable=False, server_default="")
+    date=db.Column(db.Date, nullable=False, server_default="2005, 3, 15")
     image=db.Column(db.String, nullable=False, server_default="")
 
     employer_id = db.Column(db.Integer, db.ForeignKey("employmentHistory.id"), nullable=True)
@@ -257,7 +257,7 @@ class Charities(db.Model, SerializerMixin):
     logo=db.Column(db.String, nullable=False)
     charity_description=db.Column(db.String, nullable=False)
     role=db.Column(db.String, nullable=False, server_default="")
-    start_date=db.Column(db.Date, nullable=False, server_default="")
+    start_date=db.Column(db.Date, nullable=False, server_default="2005, 03, 15")
     end_date=db.Column(db.String, nullable=False, server_default="Present")
 
     key_roles = db.relationship("KeyRoles", backref="charity")

@@ -15,7 +15,8 @@ from models import Profile, EmploymentHistory, KeyRoles, EmployeeCaseStudies, Em
 #test
 
 @app.route('/')
-def index ():
+@app.route('/<int:id>')
+def index (id=0):
     return render_template("index.html")
 
 class Profiles(Resource):

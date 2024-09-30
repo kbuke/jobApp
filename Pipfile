@@ -6,12 +6,14 @@ name = "pypi"
 [packages]
 flask = "*"
 gunicorn = "*"
-psycopg2-binary = "*"
-flask-sqlalchemy = "*"
-flask-migrate = "*"
-sqlalchemy-serializer = "*"
-flask-restful = "*"
-flask-cors="*"
+psycopg2_binary = "*"
+flask_sqlalchemy = "*"
+flask_migrate = "*"
+sqlalchemy_serializer = "*"
+flask_restful = "*"
+flask_cors = "*"
+python_dotenv = "0.21.0"
+honcho = "*"
 
 [dev-packages]
 
