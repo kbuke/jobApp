@@ -10,8 +10,11 @@ import smtplib
 
 from email.mime.text import MIMEText
 
-
 from models import Profile, EmploymentHistory, KeyRoles, EmployeeCaseStudies, EmployerReference, CaseStudyRoles, Education, SocialMedia, CapstoneProjects, CapstoneProjectAchievments, CapstoneProjectContext, Charities, WorkCountries, Emails, CardOptions, SoftwareLanguages
+
+@app.route('/')
+def index ():
+    return render_template("index.html")
 
 class Profiles(Resource):
     def get(self):
