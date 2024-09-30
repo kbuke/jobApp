@@ -149,21 +149,13 @@ class EmployerReference(db.Model, SerializerMixin):
         "-charity.reference",
     )
 
-    #Add validations
-    @validates("employer_id", "charity_id")
-    def validate_employer_or_charity(self, key, value):
-        employer_id = self.employer_id
-        charity_id = self.charity_id 
-
-        if key == "employer_id":
-            employer_id = value 
-        elif key == "charity_id":
-            charity_id = value 
-        
-        if employer_id is None and charity_id is None:
-            raise ValueError("At least one employer or charity id must be given")
-        
-        return value 
+    # Add validation through event listener
+@event.listens_for(KeyRoles, 'before_insert')
+@event.listens_for(KeyRoles, 'before_update')
+def validate_employer_or_charity(mapper, connection, target):
+    # Check that at least one of employer_id or charity_id is provided
+    if not target.employer_id and not target.charity_id:
+        raise ValueError("At least one of employer_id or charity_id must be provided.")
 
 #-------------------------Set up case study roles-------------------------
 class CaseStudyRoles(db.Model, SerializerMixin):

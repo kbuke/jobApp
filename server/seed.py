@@ -257,16 +257,12 @@ if __name__ == "__main__":
             image="https://immigrationbarrister.co.uk/content/uploads/2021/01/AdobeStock_84445998-scaled-e1611654853393.jpeg"
         )
 
-        hobbies = CardOptions(
-            title="Hobbies",
-            image="https://www.cvmaker.uk/static/43716d799aa73abfd36f848df81815f9/126f5/06_when-and-how-to-list-hobbies-and-interests_.png"
-        )
 
         socials = CardOptions(
             title="Social Media",
             image="https://www.wscubetech.com/blog/wp-content/uploads/2024/04/social-media-1024x683.webp"
         )
-        db.session.add_all([work, education, projects, coding_languages, references, charity, hobbies, socials])
+        db.session.add_all([work, education, projects, coding_languages, references, charity, socials])
         db.session.commit()
 
         print("Seeding Languages")

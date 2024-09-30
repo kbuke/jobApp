@@ -15,9 +15,7 @@ from models import Profile, EmploymentHistory, KeyRoles, EmployeeCaseStudies, Em
 
 class Profiles(Resource):
     def get(self):
-        profiles = [profile.to_dict(rules=(
-            "-_password_hash",
-        )) for profile in Profile.query.all()]
+        profiles = [profile.to_dict() for profile in Profile.query.all()]
         return profiles, 200
 
 class ProfilesId(Resource):
@@ -30,20 +28,27 @@ class ProfilesId(Resource):
         }, 404
     
     def patch(self, id):
-        data=request.get_json()
-        user_info=Profile.query.filter(Profile.id==id).first()
+        data = request.get_json()
+        user_info = Profile.query.filter(Profile.id == id).first()
+
         if user_info:
             try:
-                for attr in data:
-                    setattr(user_info, attr, data[attr])
-                db.session.add(user_info)
+                # Handle password hashing separately
+                if '_password_hash' in data:
+                    user_info.password_hash = data.pop('_password_hash')  # Use the setter to hash the password
+
+                # Set other attributes
+                for attr, value in data.items():
+                    setattr(user_info, attr, value)
+
                 db.session.commit()
+
                 return make_response(user_info.to_dict(), 202)
             except ValueError:
-                return{
+                return {
                     "error": ["Validation Error"]
                 }, 400
-        return{
+        return {
             "error": "Profile not found"
         }, 404
 
@@ -97,6 +102,49 @@ class EmployersId(Resource):
         return{
             "error": "employer not found"
         }, 404
+    
+    def patch(self, id):
+        data=request.get_json()
+        employer_info = EmploymentHistory.query.filter(EmploymentHistory.id==id).first()
+
+        if employer_info:
+            try:
+                if "start_date" in data:
+                    try:
+                        data["start_date"] = datetime.strptime(data["start_date"], "%Y-%m-%d").date()
+                    except ValueError:
+                        return {"error": "Invalid start_date format"}, 400
+                
+                if "end_date" in data:
+                    try:
+                        data["end_date"] = datetime.strptime(data["end_date"], "%Y-%m-%d").date()
+                    except ValueError:
+                        return {"error": "Invalid end_date format"}, 400
+        
+                for attr in data:
+                    setattr(employer_info, attr, data[attr])
+        
+                db.session.add(employer_info)
+                db.session.commit()
+
+                return make_response(employer_info.to_dict(), 202)
+            except ValueError:
+                return{"error": ["Validation error"]}, 400 
+        return {"error": "Employer not found"}, 404
+
+    
+    def delete(self, id):
+        employer_info = EmploymentHistory.query.filter(EmploymentHistory.id==id).first()
+        if employer_info:
+            db.session.delete(employer_info)
+            db.session.commit()
+            return{
+                "message": "Employer deleted"
+            }, 200
+        return {
+            "error": "Employer not found"
+        }, 404
+    
     
 
 
@@ -246,12 +294,77 @@ class EmployerCaseStudyId(Resource):
             "error": "case study not found"
         }, 404
 
+    def patch(self, id):
+        data=request.get_json()
+        case_study_info = EmployeeCaseStudies.query.filter(EmployeeCaseStudies.id==id).first()
+        if case_study_info:
+            try:
+                for attr in data:
+                    setattr(case_study_info, attr, data[attr])
+                db.session.add(case_study_info)
+                db.session.commit()
+                return make_response(case_study_info.to_dict(), 202)
+            except ValueError:
+                return{
+                    "error": ["Validation Error"]
+                }, 400 
+        return {
+            "error": "Case study not found"
+        }, 404
+
+    def delete(self, id):
+        case_study_info = EmployeeCaseStudies.query.filter(EmployeeCaseStudies.id == id).first()
+        if case_study_info:
+            db.session.delete(case_study_info)
+            db.session.commit()
+            return {
+                "message": "Case study deleted"
+            }, 200 
+        return {
+            "error": "Case study not found"
+        }, 404
+
 
 
 class EmployerReferences(Resource):
     def get(self):
         employer_references = [employer_reference.to_dict() for employer_reference in EmployerReference.query.all()]
         return employer_references, 200
+    
+    def post(self):
+        json=request.get_json()
+        breakpoint()
+        try:
+            charity_id = json.get("selectedCharityId")
+            employer_id = json.get("employer_id")
+
+            # Validate that at least one of them is provided
+            if not charity_id and not employer_id:
+                return {"error": "Either Charity ID or Employer ID is required."}, 400
+
+            # Validate the role description
+            if not json.get("newTitle"):
+                return {"error": "Role description is required."}, 400
+            
+            new_ref = EmployerReference(
+                title = json.get("newTitle"),
+                first_name = json.get("newFirstName"),
+                last_name = json.get("newLastName"),
+                position = json.get("newPosition"),
+                email = json.get("newEmail"),
+                reference_image = json.get("newImg"),
+                charity_id = charity_id,
+                employer_id = employer_id
+            )
+
+            db.session.add(new_ref)
+            db.session.commit()
+
+            return new_ref.to_dict(), 201
+        
+        except ValueError as e:
+            print(f"Validation Error: {e}")
+            return {"error": [str(e)]}, 400
 
 class EmployerReferencesId(Resource):
     def get(self, id):
@@ -344,8 +457,18 @@ class WorkCaseStudyId(Resource):
             return {
                 "error": "Case Study Role not found"
             }, 404
-
-
+    
+    def delete(self, id):
+        case_study_info = CaseStudyRoles.query.filter(CaseStudyRoles.id == id).first()
+        if case_study_info:
+            db.session.delete(case_study_info)
+            db.session.commit()
+            return{
+                "message": "Study role deleted"
+            }, 200 
+        return{
+            "error": "Study role not found"
+        }, 404
 
 
 class EducationalHistory(Resource):
@@ -379,6 +502,56 @@ class EducationalHistory(Resource):
             return {
                 "error": [str(e)]
             }, 400
+
+class EducationHistoryId(Resource):
+    def get(self, id):
+        education_info = Education.query.filter(Education.id==id).first()
+        if education_info:
+            return make_response(education_info.to_dict(), 201)
+        return {
+            "error": "school not found"
+        }, 404 
+    
+    def patch(self, id):
+        data = request.get_json()
+        education_info = Education.query.filter(Education.id==id).first()
+
+        if education_info:
+            try:
+                if "start_date" in data:
+                    try:
+                        data["start_date"] = datetime.strptime(data["start_date"], "%Y-%m-%d").date()
+                    except ValueError:
+                        return {"error": "Invalid start_date format"}, 400
+                
+                if "end_date" in data:
+                    try:
+                        data["end_date"] = datetime.strptime(data["end_date"], "%Y-%m-%d").date()
+                    except ValueError:
+                        return {"error": "Invalid end_date format"}, 400
+        
+                for attr in data:
+                    setattr(education_info, attr, data[attr])
+        
+                db.session.add(education_info)
+                db.session.commit()
+
+                return make_response(education_info.to_dict(), 202)
+            except ValueError:
+                return{"error": ["Validation error"]}, 400 
+        return {"error": "School not found"}, 404
+
+    def delete(self, id):
+        school_info= Education.query.filter(Education.id==id).first()
+        if school_info:
+            db.session.delete(school_info)
+            db.session.commit()
+            return {
+                "message": "School Deleted"
+            }, 200
+        return {
+            "error": "School not found"
+        }, 404
 
     
 
@@ -803,6 +976,7 @@ api.add_resource(WorkCaseStudy, '/workcasestudyrole')
 api.add_resource(WorkCaseStudyId, '/workcasestudyrole/<int:id>')
 
 api.add_resource(EducationalHistory, '/education')
+api.add_resource(EducationHistoryId, '/education/<int:id>')
 
 api.add_resource(SocialMediaProfiles, '/socials')
 api.add_resource(SocialMediaProfilesId, '/socials/<int:id>')
