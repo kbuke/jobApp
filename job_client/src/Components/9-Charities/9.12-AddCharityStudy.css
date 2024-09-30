@@ -1,0 +1,13 @@
+.newCharityStudyCard{
+    display: flex;
+    flex-direction: column;
+    height: 400px;
+    background-color: black;
+    border-radius: 20px;
+    overflow-y: auto;
+    color: white;
+}
+
+.newStudyInput{
+    margin-bottom: 10px;
+}

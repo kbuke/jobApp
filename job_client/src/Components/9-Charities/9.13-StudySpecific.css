@@ -1,0 +1,92 @@
+#specificCharityStudyContainer {
+    width: 100%;
+    border: solid;
+    background-color: black;
+    display: grid;
+    grid-template-columns: 60% 40%;
+    margin-bottom: 20px;
+    color: white;
+}
+
+#caseStudySpecificImgContainer {
+    height: 600px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+#caseStudySpecificImg {
+    height: 100%;
+    width: 100%;
+}
+
+.specificCharityStudyTitle {
+    justify-self: center;
+    font-weight: 300;
+    text-decoration: underline;
+    text-align: center;
+}
+
+#caseStudySpecificRightContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+/* Wrap the list with a new div and align it left */
+#caseStudyRolesWrapper {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    margin-top: 30px;
+}
+
+#caseStudyRoles {
+    list-style-type: disc; /* Adds bullet points */
+    padding-left: 20px;    /* Adjusts spacing for bullet points */
+}
+
+.charityStudyRole {
+    margin-bottom: 10px;
+    text-align: left;
+    align-self: flex-start;
+}
+
+.addCharityStudyIconContainer {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    background-color: white;
+    overflow: hidden;
+    justify-self: center;
+}
+
+.addCharityStudyIcon {
+    max-height: 100%;
+    max-width: 100%;
+}
+
+.studyRoleButtonContainer{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.studyRoleButton{
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.studyRoleButtonImg{
+    max-height: 100%;
+    max-width: 100%;
+}
+

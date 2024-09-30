@@ -1,0 +1,72 @@
+#rolesListContainer{
+    justify-self: flex-start;
+    align-self: flex-start;
+    justify-content: flex-start; /* Align items to the start horizontally */
+    align-items: flex-start; /* Align items to the start vertically */
+    text-align: left; /* Ensure text is aligned left */
+    width: 100%; /* Ensure the list takes the full width */
+    padding-left: 0; /* Remove any default padding for the list */
+    margin-left: 10px; /* Optional: Add left margin for slight spacing */
+}
+
+.renderedRolesList{
+    text-align: left; /* Align the text inside the list items to the left */
+    list-style-position: inside; /* Ensure bullet points are inside the list */
+    margin-bottom: 5px;
+    width: 100%; /* Ensure list items take full width */
+}
+
+#addCharityIconContainer{
+    height: 80px;
+    width: 80px;
+    background-color: white;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+#addCharityIcon{
+    max-height: 100%;
+    max-width: 100%;
+}
+
+#loggedCharityRoleContainer{
+    margin-left: 10px;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+}
+
+.charityRoleButtonContainer{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    border: solid;
+}
+
+.charityRoleButtonContainer{
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    overflow: hidden;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.charityRoleButtonIcon{
+    height: 100%;
+    width: 150%;
+}
+
+#charityRoleIconsContainer{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}

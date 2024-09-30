@@ -1,0 +1,21 @@
+.editProjectInfo{
+    margin-bottom: 10px;
+}
+
+#editProjectButtons{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+    margin-bottom: 20px;
+}
+
+.editProjectButton{
+    width: 200px;
+    justify-self: center;
+}
+
+#editProjectForm{
+    text-align: center;
+}

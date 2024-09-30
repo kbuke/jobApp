@@ -1,0 +1,20 @@
+#editCharityForm{
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    text-align: center;
+}
+
+.editCharityInputs{
+    margin-bottom: 10px;
+}
+
+.editCharityButtonContainer{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    margin-left: 40px;
+    margin-right: 40px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}

@@ -1,0 +1,52 @@
+#roleButtonsWrapper{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+
+#addRolesIconContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    justify-self: center;
+    height: 80px;
+    width: 80px;
+    border: solid;
+    border-radius: 50%;
+    cursor: pointer;
+    background-color: white;
+}
+
+#jobRoleUserGrid{
+    display: grid;
+    grid-template-columns: 90% 10%;
+    margin-bottom: 30px;
+    border-bottom: solid;
+}
+
+.jobRoleUserIconContainer{
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background-color: white;
+}
+
+.jobRoleUserIcon{
+    max-height: 100%;
+    max-width: 100%;
+}
+
+#editRoleInput{
+    width: 90%;
+}
+
+#renderedEmployedRoles{
+    margin-bottom: 10px;
+}

@@ -1,0 +1,98 @@
+#projectGoalCard,
+#userProjectGoalCard{
+    height: 400px;
+    width: 300px;
+    border-radius: 20px;
+    background-color: #5cbdb9;
+    color: white;
+    margin-bottom: 20px;
+}
+
+#projectGoalCard{
+    display: grid;
+    grid-template-rows: 50% 50%;
+}
+
+#userProjectGoalCard{
+    display: grid;
+    grid-template-rows: 50% 30% 20%;
+    margin-top: 20px;
+    border: solid;
+    overflow: hidden;
+    text-align: center;
+}
+
+#projectGoalImgContainer{
+    height: 100%;
+    width: 100%;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+#projectGoalImg{
+    height: 100%;
+    max-width: 100%;
+}
+
+#projectGoalWheel{
+    display: grid;
+    overflow-x: auto;
+    grid-template-columns: 28%;
+    grid-auto-flow: column;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+#addNewProjectGoalContainer{
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    background-color: white;
+    cursor: pointer;
+    border: solid;
+    margin-left: 150px;
+}
+
+#addNewProjectGoal{
+    max-height: 100%;
+    max-width: 100%;
+}
+
+#projectGoalContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.advanceAchievmentGrid{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    align-items: center;
+    justify-content: center;
+}
+
+.advanceAchievmentButton{
+    height: 70px;
+    width: 70px;
+    justify-self: center;
+    display: flex;
+    border-radius: 50%;
+    align-items: center;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.advanceAchievmentOption{
+    max-height: 100%;
+    max-width: 100%;
+}

@@ -1,0 +1,47 @@
+
+#jobSpecsGrid{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    width: 100%;
+    border: solid;
+}
+
+
+
+#rightSideSpecsGrid{
+    border-left: solid;
+}
+
+.specificJobTitles{
+    text-decoration: underline;
+    font-weight: 350;
+    font-size: 200%;
+    justify-self: flex-start;
+    align-self: flex-start;
+    text-align: center;
+}
+
+#caseStudyContainers{
+    border-bottom: solid;
+}
+
+#jobRefContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #a28089;
+    color: white;
+}
+
+#employerPositionContainer{
+    width: 100%;
+    text-align: center;
+}
+
+.employerPositionText{
+    margin-bottom: 3px;
+}
+
+.employerDateText{
+    margin-top: 0px;
+}

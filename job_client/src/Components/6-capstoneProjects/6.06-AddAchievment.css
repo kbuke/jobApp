@@ -1,0 +1,26 @@
+#newAchievmentCard{
+    background-color: black;
+    color: white;
+    height: 400px;
+    width: 300px;
+    border-radius: 20px;
+    margin-top: 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.newAchievmentInput{
+    margin-bottom: 20px;
+}
+
+#newAchievmentButtonContainer{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 50px;
+}
+
+.newAchievmentButton{
+    justify-self: center;
+    width: 100px;
+}

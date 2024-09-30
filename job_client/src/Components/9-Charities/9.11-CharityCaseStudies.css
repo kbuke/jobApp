@@ -1,0 +1,129 @@
+#charityCaseStudyWheel{
+    display: grid;
+    width: 80%;
+    overflow-x: auto;
+    grid-auto-flow: column;
+    grid-auto-columns: 28%;
+    align-items: center;
+    gap: 20px;
+}
+
+.charityStudyCard,
+.loggedCharityStudyCard{
+    display: grid;
+    /* grid-template-rows: 60% 10% 30%; */
+    margin-top: 10px;
+    border-radius: 20px;
+    border: solid;
+    height: 500px;
+    margin-bottom: 10px;
+    background-color: #5cbdb9;
+    color: white;
+    justify-content: center;
+    align-items: center;
+}
+
+.charityStudyCard{
+    grid-template-rows: 60% 10% 30%;
+}
+
+.loggedCharityStudyCard{
+    grid-template-rows: 60% 10% 20% 10%;
+}
+
+.charityStudyCardImgContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    width: 100%;
+    background-color: white;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    height: 100%;
+}
+
+.charityStudyCardImg{
+    height: 100%;
+    max-width: 100%;
+}
+
+#addCharityStudyIconContainer{
+    height: 80px;
+    width: 80px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: solid;
+    background-color: white;
+    cursor: pointer;
+}
+
+#addCharityStudyIcon{
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.charityMoreInfoIcon{
+    max-height: 100%;
+    max-width: 100%;
+    transition: transform 0.5s ease;
+}
+
+#viewLessInfo {
+    transform: rotate(180deg);
+}
+
+#viewMoreInfo {
+    transform: rotate(180deg);
+}
+
+.charityMoreInfoIconCotainer,
+.charityLessInfoContainer{
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    justify-self: center;
+    cursor: pointer;
+}
+
+.charityMoreInfoIconCotainer{
+    background-color: #66FF99;
+}
+
+.charityLessInfoContainer{
+    background-color: red;
+}
+
+.charityMoreInfoIcon{
+    max-height: 100%;
+    max-width: 100%;
+}
+
+#charityCaseStudyButtonContainer{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.charityCaseStudyButton{
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    justify-self: center;
+    margin-bottom: 3px;
+    cursor: pointer;
+}
+
+.charityCaseStudyButtonImg{
+    max-height: 100%;
+    max-width: 100%;
+}

@@ -1,0 +1,80 @@
+.refName,
+.refPosition{
+    text-align: center;
+    text-decoration: underline;
+    margin-bottom: 5px;
+    margin-top: 5px;
+}
+
+.refName{
+    font-size: 150%;
+}
+
+.refPosition{
+    margin-top: 0px;
+}
+
+.refImgContainer{
+    height: 200px;
+    width: 200px;
+    border-radius: 50%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.refEmail{
+    text-align: center;
+}
+
+.addRefContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    justify-self: center;
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    background-color: white;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+#addRefImg{
+    max-height: 100%;
+    max-width: 100%;
+}
+
+#extraRefContainer{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#editRefButtonContainer{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+}
+
+.editRefButton{
+    height: 80px;
+    width: 80px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.editRefButtonIcon{
+    max-height: 100%;
+    max-width: 100%;
+}
+

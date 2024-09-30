@@ -1,0 +1,243 @@
+#introContainer{
+    background-color:#2d545e;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+#profileIntroContainer{
+    display: flex;
+    margin-top: 10px;
+    text-align: center;
+    flex-direction: column;
+    align-items: center;
+    width: 95%;
+    border-radius: 10px;
+    border: solid;
+    background-color: #e1b382
+}
+
+#profileImgContainer{
+    border: solid;
+    cursor: pointer;
+    display: flex;
+    height: 150px;
+    width: 150px;
+    overflow: hidden;
+    border-radius: 50%;
+    margin-top: 10px;
+}
+
+#profileImg{
+    max-width: 100%;
+    max-height: 100%;
+}
+
+#profileName{
+    font-size: 250%;
+    font-weight: 300;
+    text-decoration: underline;
+    margin-bottom: 5px;
+}
+
+#hoverEmailContainer,
+#noHoverEmailContainer {
+    text-align: center;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+    cursor: pointer;
+    background: linear-gradient(to right, green 50%, red 50%);
+    background-size: 200% 100%;
+    background-position: right bottom;
+    transition: background-position 0.5s ease-in-out;
+    margin-top: 0px;
+    width: 200px;
+    height: 70px;
+}
+
+#hoverEmailContainer {
+    background-position: left bottom;
+}
+
+#emailText,
+#sendEmailText {
+    text-decoration: underline;
+    margin-left: 10px;
+    margin-right: 10px;
+    transition: color 0.5s ease-in-out;
+    font-weight: 200;
+    color: white;
+}
+
+#profileIntroGrid{
+   display: grid;
+   width: 97%;
+   grid-template-columns: 20% 80%;
+   margin-top: 20px;
+   gap: 40px;
+   margin-bottom: 20px;
+}
+
+#userIntroColumn{
+    display: flex;
+    flex-direction: column;
+    width: 97.35%;
+}
+
+#userBio{
+    font-weight: 400;
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+#userSpecificsGrid{
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+#currentLocationGrid,
+#homeLocationGrid{
+    display: grid;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    grid-template-columns: 50% 50%;
+    margin-top: 0px;
+}
+
+#currentLocationIconContainer,
+#homeLocationIconContainer{
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+#currentLocationIcon,
+#homeLocationIcon{
+    max-height: 100%;
+    max-width: 100%;
+}
+
+#employedContainer,
+#unemployedContainer,
+#searchingContainer,
+#notSearchingContainer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    width: 300px;
+}
+
+#employedContainer,
+#searchingContainer{
+    background-color: #9bc400;
+}
+
+#unemployedContainer,
+#notSearchingContainer{
+    background-color: red;
+    color: white;
+}
+
+#employmentStatusGrid{
+    display: grid;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 100px;
+    margin-top: 20px;
+}
+
+#renderedExitContainer{
+    height: 60px;
+    width: 60px;
+    border-radius: 50%;
+    overflow: hidden;
+    justify-self: end;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: red;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+#exitImg{
+    max-width: 100%;
+    max-height: 100%;
+}
+
+#editIconContainer{
+    height: 40px;
+    width: 40px;
+    border: solid;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    cursor: pointer;
+    justify-self: center;
+}
+
+#editIcon{
+    max-height: 100%;
+    max-width: 100%;
+}
+
+#userIntroContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+#largePopUpContainer{
+    height: 90%;
+    width: 90%;
+    background-color: white;
+    border-radius: 20px;
+}
+
+#headerGrid{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    align-items: center;
+    justify-content: center;
+    border: solid;
+    width: 100%;
+}
+
+#renderedChoice{
+    text-align: center;
+    text-decoration: underline;
+    font-weight: 300;
+    font-size: 250%;
+}
+
+#renderedBackButtonContainer{
+    height: 60px;
+    width: 60px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+#renderedBackButton{
+    max-height: 100%;
+    max-width: 100%;
+}
+
+

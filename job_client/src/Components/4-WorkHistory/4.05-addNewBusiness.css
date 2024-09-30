@@ -1,0 +1,22 @@
+
+
+#newInfoContainer{
+    display: flex;
+    justify-content: center;
+    justify-self: center;
+}
+
+#newBusinessForm{
+    background-color: white;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+#newInfoGrid{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    width: 100%;
+}

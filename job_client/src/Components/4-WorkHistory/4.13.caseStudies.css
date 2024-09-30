@@ -1,0 +1,81 @@
+#caseStudyCard,
+#userCaseStudyCard{
+    overflow: hidden;
+    border-radius: 20px;
+    display: grid;
+    border: solid;
+    height: 350px;
+    background-color: white;
+    cursor: pointer;
+}
+
+#caseStudyCard{
+    grid-template-rows: 70% 30%;
+}
+
+#userCaseStudyCard{
+    grid-template-rows: 70% 15% 15%;
+}
+
+#caseStudyImg{
+    height: 100%;
+    width: 100%;
+}
+
+#newStudyIconContainer{
+    height: 80px;
+    width: 80px;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    border: solid;
+    border-radius: 50%;
+    background-color: white;
+    cursor: pointer;
+}
+
+#newStudyIcon{
+    max-height: 100%;
+    max-width: 100%;
+}
+
+#caseStudyOptionsWheel{
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 28%;
+    gap: 20px;
+
+    overflow-x: auto;
+    margin-left: 10px;
+    margin-right: 10px;
+
+    align-items: center;
+
+    margin-bottom: 20px;
+}
+
+#editStudyButtonContainer{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+.editStudyButtons{
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    justify-self: center;
+    cursor: pointer;
+}
+
+.editStudyButtonImg{
+    max-height: 100%;
+    max-width: 100%;
+}

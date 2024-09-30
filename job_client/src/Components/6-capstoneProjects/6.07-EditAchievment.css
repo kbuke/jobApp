@@ -1,0 +1,13 @@
+.editAchievments{
+    margin-bottom: 20px;
+    height: 40px;
+    margin-top: 20px;
+}
+
+#editAchievmentGrid{
+    display: grid;
+    grid-template-columns: 50% 50%;
+    gap: 50px;
+    align-items: center;
+    justify-content: center;
+}

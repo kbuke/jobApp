@@ -1,0 +1,241 @@
+#smallProjectContainer,
+#largeProjectContainer{
+    background-color: #fff5d7;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 20px;
+    overflow-y: auto;
+}
+
+#smallProjectContainer{
+    width: 80%;
+    height: 60%;
+}
+
+#largeProjectContainer{
+    width: 90%;
+    height: 90%;
+}
+
+#projectWheel{
+    display: grid;
+    overflow-x: auto;
+    grid-auto-flow: column;
+    width: 80%;
+    grid-template-columns: 28%;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+#capstoneCard,
+#loggedCapstoneCard{
+    height: 300px;
+    border: solid;
+    display: grid;
+    border-radius: 20px;
+    overflow: hidden;
+    background-color: #5cbdb9;
+    width: 100%;
+    color: white;
+    cursor: pointer;
+    width: 200px;
+}
+
+#capstoneCard{
+    grid-template-rows: 50% 50%;
+}
+
+#loggedCapstoneCard{
+    grid-template-rows: 50% 30% 20%;
+}
+
+#capstoneCardImgContainer{
+    background-color: white;
+    overflow: hidden;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+#capstoneCardImg{
+    max-height: 100%;
+    max-width: 100%;
+}
+
+#capstoneProjectInfo{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#capstoneLocation{
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    border: solid;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+}
+
+#capstoneLocationImg{
+    max-height: 100%;
+    max-width: 100%;
+}
+
+#addNewCapstoneProjectContainer{
+    height: 80px;
+    width: 80px;
+    border-radius: 50%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    cursor: pointer;
+}
+
+#addNewCapstoneProjectIcon{
+    max-height: 100%;
+    max-width: 100%;
+}
+
+#caseStudyOptionGrid{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    align-items: center;
+    justify-content: center;
+}
+
+.caseStudyOptionContainer{
+    height: 50px;
+    width: 50px;
+    background-color: white;
+    border-radius: 50%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    justify-self: center;
+}
+
+.caseStudyOptionIcon{
+    max-height: 100%;
+    max-width: 100%;
+}
+
+
+
+
+
+/* #projectTable{
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.projectLogoContainer{
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+    overflow: hidden;
+    justify-self: center;
+}
+
+#projectLogo{
+    max-width: 100%;
+    max-height: 100%;
+    cursor: pointer;
+}
+
+#projectTitle{
+    font-weight: 300;
+    text-decoration: underline;
+    text-align: center;
+}
+
+#projectLocationContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#projectLocation{
+    font-weight: 200;
+    margin-bottom: 0px;
+}
+
+#projectLocationImgContainer{
+    height: 80px;
+    width: 80px;
+    border-radius: 50%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 0px;
+    justify-self: center;
+}
+
+#projectLocationImg{
+    max-height: 100%;
+    max-width: 100%;
+}
+
+#gitHubIconContainer{
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    overflow: hidden;
+    justify-content: center;
+    align-items: center;
+    justify-self: center;
+}
+
+#gitHubIcon{
+    max-height: 100%;
+    max-width: 100%;
+}
+
+#projectTitleGrid{
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    align-items: center;
+    justify-content: center;
+    border-bottom: solid;
+}
+
+#projectTitles{
+    text-align: center;
+    font-weight: 300;
+}
+
+#newBackButtonContainer{
+    height: 50px;
+    width: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    margin-left: 10px;
+    margin-bottom: 3px;
+    cursor: pointer;
+}
+
+#hoveredProject{
+    transition: transform 0.3s ease-in-out;
+}
+
+#hoveredProject:hover{
+    transform: translateY(-10px);
+} */

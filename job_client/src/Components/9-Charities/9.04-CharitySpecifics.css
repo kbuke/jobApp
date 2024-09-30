@@ -1,0 +1,83 @@
+#specificCharityContainer{
+    width: 100%;
+    border: solid;
+    margin-top: 20px;
+}
+
+#specificCharityInfoGrid{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    border: solid;
+    width: 100%;
+}
+
+#specificCharityInfoRightSide,
+#specificInfoLeftSide{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    border-right: solid;
+}
+
+#specificCharityLogoContainer{
+    background-color: white;
+    height: 200px;
+    width: 200px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    margin-top: 10px;
+}
+
+#specificCharityLogo{
+    max-height: 100%;
+    max-width: 100%;
+}
+
+.charityDescription{
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+#charityRole{
+    margin-bottom: 0px;
+}
+
+#charityDates{
+    margin-top: 3px;
+}
+
+#charityRolesHeader{
+    justify-self: flex-start;
+    align-self: flex-start;
+    margin-left: 10px;
+    text-decoration: underline;
+}
+
+#charityCaseStudyContainer,
+#charityReferenceContainer{
+    text-align: center;
+    border-bottom: solid;
+}
+
+#charityCaseStudyContainer{
+    margin-bottom: 0px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#charityReferenceContainer{
+    color: white;
+    background-color: #a28089;
+    margin-top: 0px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}

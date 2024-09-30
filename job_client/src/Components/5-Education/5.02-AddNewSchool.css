@@ -1,0 +1,34 @@
+
+
+#newSchoolInfoGrid {
+    display: grid;
+    grid-template-columns: 1fr 2fr; /* More space for the inputs */
+    gap: 10px; /* Add space between elements */
+    width: 100%; /* Ensure the grid takes up full width */
+    align-items: center;
+    overflow-y: auto;
+}
+
+#newSchoolContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* overflow-y: auto; */
+    border: solid;
+    background-color: white;
+    width: 80%; /* Adjust width as needed */
+    padding: 20px; /* Add padding for spacing */
+    height: 1000px;
+}
+
+input {
+    width: 100%; /* Ensure input fields take up available space */
+    padding: 8px; /* Add padding inside the input fields */
+    box-sizing: border-box; /* Prevent padding from overflowing */
+}
+
+#newSchoolContainer {
+    max-height: 90vh; /* Ensure it doesn't overflow vertically */
+    overflow-y: auto; /* Add scroll if necessary */
+}

@@ -1,0 +1,39 @@
+#loginContainer{
+    width: 80%;
+    height: 60%;
+    border-radius: 10px;
+    background-color: white;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+}
+
+#loginGrid{
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    margin-top: 20px;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+}
+
+.loginInputBox{
+    justify-content: center;
+    width: 40%;
+}
+
+#loginButtonContainer{
+    display: grid;
+    grid-template-columns: 50% 50%;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+    margin-top: 40px;
+}
+
+#loginButton{
+    justify-self: center;
+    width: 70%;
+}

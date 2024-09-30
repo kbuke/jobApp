@@ -1,0 +1,15 @@
+#confirmProjectDeletionGrid{
+    display: grid;
+    width: 60%;
+    grid-template-columns: repeat(2, 1fr);
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+#confirmProjectDeletionButtonGrid{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}

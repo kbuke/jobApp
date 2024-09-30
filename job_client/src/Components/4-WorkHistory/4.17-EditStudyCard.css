@@ -1,0 +1,25 @@
+#editStudyForm{
+    display: flex;
+    flex-direction: column;
+    height: 350px;
+    overflow-y: auto;
+    border-radius: 20px;
+    background-color: black;
+}
+
+.employerCaseStudyInput{
+    margin-bottom: 20px;
+}
+
+#editStudyByttonContainer{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+}
+
+.editStudyButton{
+    justify-self: center;
+    width: 100px;
+}

@@ -1,0 +1,72 @@
+/* #renderSocialGrid{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    align-items: center;
+    width: 100%;
+    justify-content: center;
+    gap: 80px;
+    margin-top: 20px;
+}
+
+.socialCard,
+#hoveredSocialCard{
+    height: 400px;
+    border-radius: 10px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: white;
+    margin-left: 10px;
+} */
+
+.smContainer{
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    background-color: white;
+}
+
+.smImg{
+    max-height: 100%;
+    max-width: 100%;
+}
+
+#socialMediaWheel{
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 32%;
+
+    overflow-x: auto;
+    align-items: center;
+    margin-top: 50px;
+
+    margin-left: 30px;
+    margin-right: 30px;
+}
+
+.socialsContainer{
+    display: grid;
+    grid-template-rows: 80% 20%;
+}
+
+#deleteSocialsIconContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    height: 40px;
+    width: 40px;
+    background-color: white;
+    overflow: hidden;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+#deleteSocialsIcon{
+    max-height: 100%;
+    max-width: 100%;
+}

@@ -1,0 +1,53 @@
+#refImgContainer{
+    height: 200px;
+    width: 200px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    background-color: white;
+    justify-self: center;
+}
+
+#refImg{
+    max-height: 100%;
+    max-width: 100%;
+}
+
+#charityRefName{
+    margin-bottom: 0px;
+    font-weight: 200;
+    font-size: 200%;
+}
+
+#charityRefRole{
+    margin-top: 0px;
+}
+
+#charityRefOptionButtonContainer{
+    width: 80%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.charityRefOptionButton{
+    height: 80px;
+    width: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    cursor: pointer;
+    border-radius: 50%;
+    justify-self: center;
+}
+
+.charityRefOptionIcon{
+    max-height: 100%;
+    max-width: 100%;
+}

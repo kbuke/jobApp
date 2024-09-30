@@ -1,0 +1,148 @@
+.charityIconContainer{
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+    overflow: hidden;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.charityLogo{
+    max-height: 100%;
+    max-width: 100%;
+}
+
+#smallCharityContainer,
+#largeCharityContainer{
+    border-radius: 20px;
+    background-color: #fff5d7;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+}
+
+#smallCharityContainer{
+    height: 80%;
+    width: 85%;
+}
+
+#largeCharityContainer{
+    height: 95%;
+    width: 95%;
+}
+
+                   
+#charityWheel{
+    display: grid;
+    overflow-x: auto;
+    grid-auto-flow: column;
+    align-items: center;
+    margin-left: 40px;
+    margin-right: 40px;
+    align-items: center;
+    grid-template-columns: 28%;
+    height: 200px;
+    margin-top: 25px;
+    border: solid;
+    margin-bottom: 0px;
+}
+
+#charitiesSmallGrid{
+    display: grid;
+    grid-template-rows: 60% 40%;
+    gap: 0%;
+}
+
+.charityOptionIconContainer{
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    justify-self: center;
+    cursor: pointer;
+}
+
+.charityOptionIcon{
+    max-height: 100%;
+    max-width: 100%;
+}
+
+#editDeleteCharityContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+#editDeleteButtonContainer{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    width: 100%;
+}
+
+
+
+/* #charityHeader{
+    justify-self: center;
+}
+
+#allCharityGrid{
+    display: grid;
+    width: 100%;
+    grid-template-columns: repeat(3, 1fr);
+    justify-content: center;
+    align-items: center;
+    margin-top: 15px;
+}
+
+.charityBlock{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#hoveredCharityBlock{
+    transition: transform 0.3s ease-in-out;
+}
+
+#hoveredCharityBlock:hover{
+    transform: translateY(-10px);
+}
+
+
+
+
+
+#charityImgContainer{
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    border: solid;
+    justify-self: center;
+    cursor: pointer;
+}
+
+#charityImg{
+    max-width: 100%;
+    max-height: 100%;
+}
+
+#charityName{
+    margin-top: 5px;
+    font-size: 150%;
+    text-decoration: underline;
+    font-weight: 400;
+} */

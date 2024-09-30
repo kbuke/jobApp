@@ -1,0 +1,19 @@
+#specificEducationContainer{
+    background-color: black;
+    height: 100%;
+    width: 100%;
+    margin-top: 10px;
+    color: white;
+}
+
+#schoolName{
+    text-decoration: underline;
+}
+
+.educationInfoGrid{
+    display: grid;
+    width: 40%;
+    grid-template-columns: repeat(2, 1fr);
+    align-items: center;
+    margin-left: 10px;
+}

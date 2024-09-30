@@ -1,0 +1,9 @@
+#newCharityForm{
+    width: 100%;
+}
+
+#newCharityRoleInput{
+    width: 80%;
+    margin-bottom: 5px;
+    text-align: center;
+}
