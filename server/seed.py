@@ -6,6 +6,8 @@ from config import db
 
 from datetime import date
 
+#test
+
 
 if __name__ == "__main__":
     with app.app_context():
