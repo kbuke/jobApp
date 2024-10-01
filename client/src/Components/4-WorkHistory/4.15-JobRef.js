@@ -155,37 +155,40 @@ function JobRef({
                                     </div>
                                 </form>
                                 :
-                                <>
-                                    <button
-                                        className="editRefButton"
-                                        onClick={() => handleEdit(
-                                            referenceIndex.id, 
-                                            referenceIndex.title,
-                                            referenceIndex.first_name,
-                                            referenceIndex.last_name,
-                                            referenceIndex.position,
-                                            referenceIndex.email,
-                                            referenceIndex.reference_image
-                                        )}
-                                    >
-                                        <img 
-                                            className="editRefButtonIcon"
-                                            src={editRefIcon}
-                                            alt="editRef"
-                                        />
-                                    </button>
+                                loggedUser ?
+                                    <>
+                                        <button
+                                            className="editRefButton"
+                                            onClick={() => handleEdit(
+                                                referenceIndex.id, 
+                                                referenceIndex.title,
+                                                referenceIndex.first_name,
+                                                referenceIndex.last_name,
+                                                referenceIndex.position,
+                                                referenceIndex.email,
+                                                referenceIndex.reference_image
+                                            )}
+                                        >
+                                            <img 
+                                                className="editRefButtonIcon"
+                                                src={editRefIcon}
+                                                alt="editRef"
+                                            />
+                                        </button>
 
-                                    <button
-                                        className="editRefButton" 
-                                        onClick={() => setDeleteId(referenceIndex.id)} 
-                                    >
-                                        <img 
-                                            className="editRefButtonIcon"
-                                            src={deleteRefIcon}
-                                            alt="deleteRef"
-                                        />
-                                    </button>
-                                </>
+                                        <button
+                                            className="editRefButton" 
+                                            onClick={() => setDeleteId(referenceIndex.id)} 
+                                        >
+                                            <img 
+                                                className="editRefButtonIcon"
+                                                src={deleteRefIcon}
+                                                alt="deleteRef"
+                                            />
+                                        </button>
+                                    </>
+                                :
+                                    null
                             }
                         </div>
                     </>
