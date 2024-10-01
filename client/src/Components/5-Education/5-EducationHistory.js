@@ -122,7 +122,7 @@ function EducationHistory({
                         <img
                             className="educationImg" 
                             src={education.school_image}
-                            alt={`${education.school} Image`}
+                            alt={`${education.school}`}
                         />
                     </div>
 
@@ -189,6 +189,7 @@ function EducationHistory({
                                     <img 
                                         className="editEducationButtonIcon"
                                         src={editIcon}
+                                        alt="editEducationIcon"
                                     />
                                 </div>
                             :

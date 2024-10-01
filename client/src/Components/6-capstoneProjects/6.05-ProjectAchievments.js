@@ -113,6 +113,7 @@ function ProjectAchievments({
             <img 
                 src={addAchievments}
                 id="addNewProjectGoal"
+                alt="addProjectIcon"
             />
         </div>
     

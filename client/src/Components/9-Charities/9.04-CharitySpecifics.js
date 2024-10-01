@@ -46,11 +46,10 @@ function CharitySpecifics({
             throw r 
         })
         .then(charity => setSelectedCharity(charity))
-    }, [allRoles, allReferences, caseStudyRoles])
+    }, [allRoles, allReferences, caseStudyRoles, selectedCharityId])
     console.log(allCaseStudies)
 
     //Get the charity info
-    const charityName = selectedCharity.name
     const charityLogo = selectedCharity.logo
     const charityDescription = selectedCharity.charity_description
     const charityRole = selectedCharity.role

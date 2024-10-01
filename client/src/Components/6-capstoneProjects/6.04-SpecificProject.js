@@ -25,7 +25,7 @@ function SpecificProject({
             throw r 
         })
         .then(project => setSelectedProject(project))
-    }, [allProjects, allAchievments])
+    }, [allProjects, allAchievments, projectId])
 
     console.log(selectedProject)
 
@@ -40,7 +40,6 @@ function SpecificProject({
     const projectGitImg = projectGit ? "https://cdn.pixabay.com/photo/2022/01/30/13/33/github-6980894_960_720.png" : ""
 
     const projectImg = selectedProject.image 
-    const projectName = selectedProject.name 
     const locationImg = selectedProject?.education?.school_image
 
     const projectAchievements = selectedProject.capstone_achievment
@@ -62,6 +61,7 @@ function SpecificProject({
                         <img 
                             src={projectImg}
                             id="projectImg"
+                            alt={`projectIcon`}
                         />
                     </div>
                     <h2>{projectDate}</h2>
@@ -81,6 +81,7 @@ function SpecificProject({
                             <img 
                                 src={locationImg}
                                 className="projectInfoImg"
+                                alt="projectInfoIcon"
                             />
                         </div>
                     </div>
@@ -98,6 +99,7 @@ function SpecificProject({
                                     <img 
                                         className="projectInfoImg"
                                         src={projectBlogImg}
+                                        alt="projectInfoIcon"
                                     />
                                 </Link>
                             </>
@@ -119,6 +121,7 @@ function SpecificProject({
                                     <img 
                                         className="projectInfoImg"
                                         src={projectGitImg}
+                                        alt="projectInfoIcon"
                                     />
                                 </Link>
                             </>

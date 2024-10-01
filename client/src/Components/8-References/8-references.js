@@ -75,7 +75,7 @@ function References({
         <div id="popUpContainer">
             <div id="largerPopUpContainer">
                 <div id="newInfoContainerTitleGrid">
-                    <h1></h1>
+                    <h1> </h1>
 
                     <h1 id="newCategoryTitle">
                         References 

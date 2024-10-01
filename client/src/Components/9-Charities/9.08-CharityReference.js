@@ -63,7 +63,11 @@ function CharityReference({
                     <h3 id="charityRefName">{refName}</h3>
                     <h4 id="charityRefRole">{refPosition}</h4>
                     <div id="refImgContainer">
-                        <img id="refImg" src={refImg} />
+                        <img 
+                            id="refImg" 
+                            src={refImg}
+                            alt="refIcon"
+                            />
                     </div>
                     <h4>{refEmail}</h4>
 
@@ -147,7 +151,11 @@ function CharityReference({
                         className="charityRefOptionButton"
                         onClick={() => setAddRef(true)}
                     >
-                        <img src={addRefIcon} className="charityRefOptionIcon" />
+                        <img 
+                            src={addRefIcon} 
+                            className="charityRefOptionIcon"
+                            alt="charityRefOption"
+                        />
                     </button>
                 )
                 :

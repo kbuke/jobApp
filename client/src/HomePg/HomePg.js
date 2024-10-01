@@ -154,7 +154,7 @@ function HomePg(){
                 >
                     <img 
                         id="profileImg"
-                        alt={`${userName} Image`}
+                        alt={`${userName} Icon`}
                         src={kaanPic}
                     />
                 </div>

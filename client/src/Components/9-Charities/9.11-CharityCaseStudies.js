@@ -26,8 +26,6 @@ function CharityCaseStudies({
     const [addStudy, setAddStudy] = useState(false)
 
     const [editStudyId, setEditStudyId] = useState()
-    const [studyTitle, setStudyTitle] = useState("")
-    const [studyImg, setStudyImg] = useState("")
     const [studyInfo, setStudyInfo] = useState("")
     const [studyCountry, setStudyCountry] = useState("")
     const [studyCity, setStudyCity] = useState("")
