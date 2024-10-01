@@ -25,5 +25,5 @@ sqlalchemy-serializer==1.4.12
 typing-extensions==4.12.2; python_version >= '3.8'
 werkzeug==3.0.4; python_version >= '3.8'
 zipp==3.20.2; python_version >= '3.8'
-python_dotenv=="*"
+python_dotenv=="1.0.1"
 
