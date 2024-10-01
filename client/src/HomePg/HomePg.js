@@ -62,7 +62,6 @@ function HomePg(){
     const setAllEmails = appData.setAllEmails
 
     //Get the user bio and id
-    const userId = checkUser?.id 
     const userIntro = checkUser?.profile_bio
     const currentLocation = `${checkUser?.current_town}, ${checkUser?.current_country}`
     const homeLocation = `${checkUser?.home_town}, ${checkUser?.home_country}`

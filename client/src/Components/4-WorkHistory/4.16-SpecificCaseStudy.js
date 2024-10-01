@@ -32,7 +32,7 @@ function SpecificCaseStudy({
 
     useEffect(() => (
         setFilterRoles(caseStudyRoles.filter(roles => roles.case_study_id === selectCaseStudyId))
-    ), [caseStudyRoles])
+    ), [caseStudyRoles, selectCaseStudyId])
 
     console.log(filterRoles)
 

@@ -39,8 +39,8 @@ function CaseStudies({
     console.log(`I have chosen ${selectCaseStudyId}`)
 
     useEffect(() => {
-        setFilterCaseStudies(allCaseStudies.filter(study => study.employer_id == selectedBusinessId))
-    }, [allCaseStudies])
+        setFilterCaseStudies(allCaseStudies.filter(study => study.employer_id === selectedBusinessId))
+    }, [allCaseStudies, selectedBusinessId])
 
     console.log(filterCaseStudies)
 

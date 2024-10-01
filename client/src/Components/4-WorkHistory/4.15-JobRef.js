@@ -66,7 +66,7 @@ function JobRef({
 
     useEffect(() => (
         setFilterReferences(allReferences.filter(reference => reference.employer_id === selectedBusinessId))
-    ), [allReferences])
+    ), [allReferences, selectedBusinessId])
 
     console.log(filterReferences)
 

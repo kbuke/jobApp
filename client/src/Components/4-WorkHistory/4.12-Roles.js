@@ -29,7 +29,7 @@ function Roles({
 
     useEffect(() => {
         setFilterRoles(allRoles.filter(role => role.employer_id === selectedBusinessId))
-    }, [allRoles])
+    }, [allRoles, selectedBusinessId])
 
     console.log(filterRoles)
 

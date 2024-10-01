@@ -27,7 +27,7 @@ function SpecificJob({
             throw r 
         })
         .then(job => setSpecificJob(job))
-    }, [allEmployers])
+    }, [allEmployers, selectedBusinessId])
     console.log(specificJob)
 
     //Handle overview info
