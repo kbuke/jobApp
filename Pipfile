@@ -12,8 +12,8 @@ flask_migrate = "*"
 sqlalchemy_serializer = "*"
 flask_restful = "*"
 flask_cors = "*"
-python_dotenv = "0.21.0"
 honcho = "*"
+python_dotenv = "*"
 
 [dev-packages]
 
