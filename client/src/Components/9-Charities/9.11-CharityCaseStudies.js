@@ -65,8 +65,6 @@ function CharityCaseStudies({
     }
 
     const renderCaseStudyCards = charityCaseStudies.map((study, index) => {
-        const studyImg = study.case_study_img
-        const studyTitle = study.title
         return(
             editStudyId === study.id?
                 <EditCharityCaseStudy 
