@@ -150,6 +150,22 @@ function ProjectAchievments({
                 :
                 <>
                     <h2>No achievements listed yet</h2>
+                    {loggedUser ?
+                        addNewGoal
+                        :
+                        null
+                    }
+
+                    {addNewAchievment ? 
+                        <AddAchievment 
+                            setAddNewAchievment={setAddNewAchievment}
+                            projectId={projectId}
+                            allAchievments={allAchievments}
+                            setAllAchievements={setAllAchievements}
+                        />
+                    :
+                        null
+                    }
                 </>
             }
         </>

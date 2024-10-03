@@ -64,6 +64,8 @@ function CharityCaseStudies({
         setSelectedCaseStudyImg(caseStudyImg)
     }
 
+    console.log(charityCaseStudies)
+
     const renderCaseStudyCards = charityCaseStudies.map((study, index) => {
         return(
             editStudyId === study.id?
@@ -88,13 +90,15 @@ function CharityCaseStudies({
                     >
                         <img 
                             className="charityStudyCardImg"
-                            src={studyImg}
+                            src={study.case_study_img}
                             alt="studyImg"
                         />
                     </div>
 
-                    <h3>
-                        {studyTitle}
+                    <h3
+                        id="charityStudyTitle"
+                    >
+                        {study.title}
                     </h3>
 
                     <div

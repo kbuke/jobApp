@@ -122,6 +122,7 @@ function JobRef({
                             <img 
                                 src={referenceIndex.reference_image}
                                 alt={`${referenceIndex.title} Logo`}
+                                id="refImg"
                             />
                         </div>
 

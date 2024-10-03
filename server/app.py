@@ -339,7 +339,6 @@ class EmployerReferences(Resource):
     
     def post(self):
         json=request.get_json()
-        breakpoint()
         try:
             charity_id = json.get("selectedCharityId")
             employer_id = json.get("employer_id")
