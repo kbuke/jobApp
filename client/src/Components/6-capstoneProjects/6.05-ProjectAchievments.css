@@ -40,12 +40,11 @@
 #projectGoalWheel{
     display: grid;
     overflow-x: auto;
-    grid-template-columns: 28%;
     grid-auto-flow: column;
-    gap: 20px;
     justify-content: center;
     align-items: center;
     width: 100%;
+    gap: 20px;
 }
 
 #addNewProjectGoalContainer{
