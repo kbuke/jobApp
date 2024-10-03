@@ -276,6 +276,9 @@ class Charities(db.Model, SerializerMixin):
             return value
         else:
             try:
+                # If value is a date object, convert it to a string
+                if isinstance(value, date):
+                    value = value.strftime("%Y-%m-%d")
                 # Check if the string is a valid date in YYYY-MM-DD format
                 datetime.strptime(value, "%Y-%m-%d")
                 return value
